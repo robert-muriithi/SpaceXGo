@@ -8,6 +8,7 @@ import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import androidx.room.migration.AutoMigrationSpec
 import dev.robert.spacexgo.core.utils.Constants
+import dev.robert.spacexgo.features.capsules.data.local.dao.CapsulesDao
 import dev.robert.spacexgo.features.ships.data.converters.Converters
 import dev.robert.spacexgo.features.ships.data.local.dao.ShipDao
 import dev.robert.spacexgo.features.ships.data.local.entity.ShipEntity
@@ -23,6 +24,7 @@ import dev.robert.spacexgo.features.ships.data.local.entity.ShipEntity
 @TypeConverters(Converters::class)
 abstract class SpaceXDatabase : RoomDatabase() {
     abstract val shipDao: ShipDao
+    abstract val capsulesDao : CapsulesDao
 
     @RenameColumn(
         tableName = Constants.SHIP_TABLE,
