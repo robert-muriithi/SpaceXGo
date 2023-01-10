@@ -53,11 +53,11 @@ class ShipsViewModel @Inject constructor(
                           ships = result.data ?: emptyList()
                       )
 
-                       _eventsFlow.emit(
+                       /*_eventsFlow.emit(
                            UiEvents.NavigationEvent(
                                route = FeaturesScreenDestination.route
                            )
-                       )
+                       )*/
                    }
                    else -> {
                        shipState

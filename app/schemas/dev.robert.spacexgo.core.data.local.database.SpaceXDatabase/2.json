@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "5e5508aaf08c721b9e3c8b7f0ffce172",
+    "identityHash": "7f1249378ceeaace696d627c3a61342d",
     "entities": [
       {
         "tableName": "ships_table",
@@ -96,12 +96,80 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "capsules_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `landLandings` INTEGER NOT NULL, `lastUpdate` TEXT, `launches` TEXT NOT NULL, `reuseCount` INTEGER NOT NULL, `serial` TEXT, `status` TEXT, `type` TEXT, `waterLandings` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "landLandings",
+            "columnName": "landLandings",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdate",
+            "columnName": "lastUpdate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "launches",
+            "columnName": "launches",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "reuseCount",
+            "columnName": "reuseCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serial",
+            "columnName": "serial",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "waterLandings",
+            "columnName": "waterLandings",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5e5508aaf08c721b9e3c8b7f0ffce172')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7f1249378ceeaace696d627c3a61342d')"
     ]
   }
 }
