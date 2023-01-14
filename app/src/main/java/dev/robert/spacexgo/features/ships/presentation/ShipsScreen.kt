@@ -24,7 +24,7 @@ import dev.robert.spacexgo.features.ships.domain.model.Ship
 import kotlinx.coroutines.flow.collectLatest
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Destination()
+@Destination(start = true)
 @Composable
 fun ShipsScreen(
     navigator: DestinationsNavigator,

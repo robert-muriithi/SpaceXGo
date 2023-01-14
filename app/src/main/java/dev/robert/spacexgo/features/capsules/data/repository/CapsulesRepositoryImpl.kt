@@ -1,4 +1,4 @@
-package dev.robert.spacexgo.features.capsules.data.remote
+package dev.robert.spacexgo.features.capsules.data.repository
 
 import dev.robert.spacexgo.core.data.remote.ApiService
 import dev.robert.spacexgo.core.utils.Resource

@@ -10,15 +10,15 @@ import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = darkGrey,
+    primaryVariant = darkGrey,
+    secondary = darkGrey
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = darkGrey,
+    primaryVariant = darkGrey,
+    secondary = darkGrey
 
     /* Other default colors to override
     background = Color.White,
@@ -42,7 +42,7 @@ fun SpaceXGoTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composab
 
     SideEffect {
         systemUiController.setSystemBarsColor(
-            color = if (darkTheme) Color.Red else Color.Gray
+            color = if (darkTheme) darkGrey else darkGrey
         )
     }
 

@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.robert.spacexgo.core.utils.Resource
 import dev.robert.spacexgo.core.utils.UiEvents
-import dev.robert.spacexgo.features.destinations.FeaturesScreenDestination
 import dev.robert.spacexgo.features.ships.domain.model.Ship
 import dev.robert.spacexgo.features.ships.domain.usecase.GetAllShipsUseCase
 import kotlinx.coroutines.Dispatchers

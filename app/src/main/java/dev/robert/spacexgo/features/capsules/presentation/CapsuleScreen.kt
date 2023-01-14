@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-@Destination(start = true)
+@Destination()
 fun CapsulesScreen(
     viewModel: CapsulesViewModel = hiltViewModel(),
     navigator: DestinationsNavigator,

@@ -6,10 +6,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.robert.spacexgo.core.data.remote.ApiService
 import dev.robert.spacexgo.features.capsules.data.local.dao.CapsulesDao
-import dev.robert.spacexgo.features.capsules.data.remote.CapsulesRepositoryImpl
+import dev.robert.spacexgo.features.capsules.data.repository.CapsulesRepositoryImpl
 import dev.robert.spacexgo.features.capsules.domain.repository.CapsulesRepository
 import dev.robert.spacexgo.features.capsules.domain.usecase.GetAllCapsulesUseCase
-import dev.robert.spacexgo.features.ships.domain.usecase.GetAllShipsUseCase
 import javax.inject.Singleton
 
 @Module
