@@ -26,7 +26,7 @@ class ShipsViewModel @Inject constructor(
     private val _shipState = mutableStateOf(ShipsState())
     val shipState : State<ShipsState> = _shipState
 
-    private fun getAllShips() {
+     fun getAllShips() {
         _shipState.value = shipState.value.copy(
             isLoading = true
         )

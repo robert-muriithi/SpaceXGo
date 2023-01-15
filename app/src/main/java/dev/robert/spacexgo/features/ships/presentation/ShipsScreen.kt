@@ -13,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
@@ -46,6 +47,14 @@ fun ShipsScreen(
     }
 
     val state = viewModel.shipState.value
+    ShipScreenContent(scaffoldState = scaffoldState, state = state)
+}
+
+@Composable
+fun ShipScreenContent(
+    scaffoldState: ScaffoldState,
+    state: ShipsState,
+) {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -66,38 +75,59 @@ fun ShipsScreen(
         }
     ) {
 
-
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier.fillMaxSize().padding(it)) {
             // Loading
-            if (state.isLoading) {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
+            ShipsLoadingStateComponent(state)
 
             // Error
-            if (!state.isLoading && state.error != null) {
-                Text(
-                    modifier = Modifier.align(Alignment.Center),
-                    text = state.error
-                )
-            }
+            ShipErrorStateComponent(state)
 
             // Data is Empty
-            if (!state.isLoading && state.error == null && state.ships.isEmpty()) {
-                Text(
-                    modifier = Modifier.align(Alignment.Center),
-                    text = "No Ships Found"
-                )
-            }
+            ShipsEmptyStateComponent(state)
 
             // There is Data
-            LazyColumn {
-                items(state.ships) { item ->
-                    ShipItem(ship = item)
-                }
+            ShipsSuccessStateComponent(state)
+        }
+    }
+}
+
+@Composable
+private fun ShipsSuccessStateComponent(state: ShipsState) {
+    if(!state.isLoading && state.error == null && state.ships.isNotEmpty()){
+        LazyColumn (modifier =  Modifier.testTag("ShipsSuccessStateComponent")){
+            items(state.ships) { item ->
+                ShipItem(ship = item)
             }
         }
+    }
+}
+
+@Composable
+private fun BoxScope.ShipsEmptyStateComponent(state: ShipsState) {
+    if (!state.isLoading && state.error == null && state.ships.isEmpty()) {
+        Text(
+            modifier = Modifier.align(Alignment.Center).testTag("ShipsEmptyStateComponent"),
+            text = "No Ships Found"
+        )
+    }
+}
+
+@Composable
+private fun BoxScope.ShipErrorStateComponent(state: ShipsState) {
+    if (!state.isLoading && state.error != null) {
+        Text(
+            modifier = Modifier.align(Alignment.Center).testTag("ShipErrorStateComponent"),
+            text = state.error
+        )
+    }
+}
+
+@Composable
+private fun BoxScope.ShipsLoadingStateComponent(state: ShipsState) {
+    if (state.isLoading) {
+        CircularProgressIndicator(
+            modifier = Modifier.align(Alignment.Center).testTag("ShipsLoadingStateComponent")
+        )
     }
 }
 
