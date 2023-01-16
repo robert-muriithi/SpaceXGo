@@ -3,7 +3,7 @@ package dev.robert.spacexgo.core.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class LatestDto(
+data class LaunchesDto(
     @SerializedName("auto_update")
     val autoUpdate: Boolean,
     @SerializedName("capsules")

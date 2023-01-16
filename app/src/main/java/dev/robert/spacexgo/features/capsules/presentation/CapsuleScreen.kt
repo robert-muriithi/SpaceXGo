@@ -13,7 +13,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
@@ -37,7 +36,7 @@ fun CapsulesScreen(
     LaunchedEffect(key1 = true) {
         viewModel.eventsFlow.collectLatest { event ->
             when (event) {
-                is UiEvents.SnackEvent -> {
+                is UiEvents.ErrorEvent -> {
                     scaffoldState.snackbarHostState.showSnackbar(message = event.message)
                 }
                 else -> {

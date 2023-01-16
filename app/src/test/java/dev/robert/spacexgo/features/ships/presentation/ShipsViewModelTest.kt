@@ -4,20 +4,18 @@ package dev.robert.spacexgo.features.ships.presentation
 import com.google.common.truth.Truth.assertThat
 import dev.robert.spacexgo.core.utils.Resource
 import dev.robert.spacexgo.features.ships.domain.model.Ship
-import dev.robert.spacexgo.features.ships.domain.repository.ShipsRepository
 import dev.robert.spacexgo.features.ships.domain.usecase.GetAllShipsUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 
 
 class ShipsViewModelTest {

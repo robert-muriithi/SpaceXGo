@@ -36,7 +36,7 @@ fun ShipsScreen(
     LaunchedEffect(key1 = true){
         viewModel.eventsFlow.collectLatest { event ->
             when(event){
-                is UiEvents.SnackEvent -> {
+                is UiEvents.ErrorEvent -> {
                     scaffoldState.snackbarHostState.showSnackbar(message = event.message)
                 }
                 is UiEvents.NavigationEvent -> {

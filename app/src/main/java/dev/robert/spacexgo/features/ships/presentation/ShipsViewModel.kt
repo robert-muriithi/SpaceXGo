@@ -9,7 +9,6 @@ import dev.robert.spacexgo.core.utils.Resource
 import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.ships.domain.model.Ship
 import dev.robert.spacexgo.features.ships.domain.usecase.GetAllShipsUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -35,7 +34,7 @@ class ShipsViewModel @Inject constructor(
                when(result){
                    is Resource.Error -> {
                        _eventsFlow.emit(
-                           UiEvents.SnackEvent(
+                           UiEvents.ErrorEvent(
                                message = result.message ?: "Unknown Error Occurred"
                            )
                        )

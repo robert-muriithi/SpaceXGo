@@ -9,7 +9,6 @@ import dev.robert.spacexgo.core.utils.Resource
 import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.capsules.domain.model.Capsule
 import dev.robert.spacexgo.features.capsules.domain.usecase.GetAllCapsulesUseCase
-import dev.robert.spacexgo.features.ships.domain.model.Ship
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -40,7 +39,7 @@ class CapsulesViewModel @Inject constructor(
                             error = result.message
                         )
                         _eventsFlow.emit(
-                            UiEvents.SnackEvent(
+                            UiEvents.ErrorEvent(
                                 message = result.message ?: "Unknown Error Occurred"
                             )
                         )

@@ -1,16 +1,11 @@
 package dev.robert.spacexgo.features.ships.presentation
 
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import dev.robert.spacexgo.MainActivity
 import dev.robert.spacexgo.features.ships.domain.model.Ship
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 
 
 class ShipsScreenTest {

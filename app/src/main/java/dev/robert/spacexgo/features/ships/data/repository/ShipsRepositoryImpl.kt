@@ -1,6 +1,5 @@
 package dev.robert.spacexgo.features.ships.data.repository
 
-import dagger.hilt.android.scopes.ActivityScoped
 import dev.robert.spacexgo.core.data.remote.ApiService
 import dev.robert.spacexgo.core.utils.Resource
 import dev.robert.spacexgo.features.ships.data.local.dao.ShipDao
