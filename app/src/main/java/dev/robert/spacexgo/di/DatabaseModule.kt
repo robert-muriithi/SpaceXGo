@@ -11,6 +11,7 @@ import dagger.hilt.components.SingletonComponent
 import dev.robert.spacexgo.core.data.local.database.SpaceXDatabase
 import dev.robert.spacexgo.core.utils.Constants
 import dev.robert.spacexgo.features.capsules.data.local.dao.CapsulesDao
+import dev.robert.spacexgo.features.company.data.local.dao.CompanyInfoDao
 import dev.robert.spacexgo.features.rockets.data.local.dao.RocketsDao
 import dev.robert.spacexgo.features.ships.data.converters.Converters
 import dev.robert.spacexgo.features.ships.data.local.dao.ShipDao
@@ -55,6 +56,12 @@ object DatabaseModule {
     @Singleton
     fun provideRocketsDao(db: SpaceXDatabase) : RocketsDao {
         return db.rocketsDao
+    }
+
+    @Provides
+    @Singleton
+    fun provideCompanyInfoDao(db: SpaceXDatabase) : CompanyInfoDao {
+        return db.companyInfoDao
     }
 
 }
