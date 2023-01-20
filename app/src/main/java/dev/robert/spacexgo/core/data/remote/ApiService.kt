@@ -14,7 +14,7 @@ interface ApiService {
     suspend fun getAllRockets() : List<RocketsDto>
 
     @GET("v4/company")
-    suspend fun getCompanyInfo() : List<CompanyInfoDto>
+    suspend fun getCompanyInfo() : CompanyInfoDto
 
     @GET("v5/launches")
     suspend fun getAllLaunches() : List<LaunchesDto>

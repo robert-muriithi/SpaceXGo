@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "fe8067ff3032327cfc3dc0855f71b6a0",
+    "identityHash": "e22f423af73ef160c7adca02ce7b4c0f",
     "entities": [
       {
         "tableName": "ships_table",
@@ -238,12 +238,122 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "company_info_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ceo` TEXT NOT NULL, `coo` TEXT NOT NULL, `cto` TEXT NOT NULL, `ctoPropulsion` TEXT NOT NULL, `employees` INTEGER NOT NULL, `founded` INTEGER NOT NULL, `founder` TEXT NOT NULL, `headquarters` TEXT NOT NULL, `id` TEXT NOT NULL, `launchSites` INTEGER NOT NULL, `links` TEXT NOT NULL, `name` TEXT NOT NULL, `summary` TEXT NOT NULL, `testSites` INTEGER NOT NULL, `valuation` INTEGER NOT NULL, `vehicles` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "ceo",
+            "columnName": "ceo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "coo",
+            "columnName": "coo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cto",
+            "columnName": "cto",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ctoPropulsion",
+            "columnName": "ctoPropulsion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "employees",
+            "columnName": "employees",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "founded",
+            "columnName": "founded",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "founder",
+            "columnName": "founder",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "headquarters",
+            "columnName": "headquarters",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "launchSites",
+            "columnName": "launchSites",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "links",
+            "columnName": "links",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "summary",
+            "columnName": "summary",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "testSites",
+            "columnName": "testSites",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valuation",
+            "columnName": "valuation",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vehicles",
+            "columnName": "vehicles",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fe8067ff3032327cfc3dc0855f71b6a0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e22f423af73ef160c7adca02ce7b4c0f')"
     ]
   }
 }
