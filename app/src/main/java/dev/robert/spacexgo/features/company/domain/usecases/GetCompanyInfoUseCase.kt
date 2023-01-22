@@ -6,7 +6,6 @@ import dev.robert.spacexgo.features.company.domain.repository.CompanyInfoReposit
 import kotlinx.coroutines.flow.Flow
 
 class GetCompanyInfoUseCase(private val repository: CompanyInfoRepository) {
-
     operator fun invoke() : Flow<Resource<CompanyInfo>> {
        return  repository.getCompanyInfo()
     }

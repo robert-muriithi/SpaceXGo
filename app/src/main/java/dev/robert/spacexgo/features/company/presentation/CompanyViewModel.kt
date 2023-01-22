@@ -8,6 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.robert.spacexgo.core.utils.Resource
 import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.company.domain.model.CompanyInfo
+import dev.robert.spacexgo.features.company.domain.model.History
+import dev.robert.spacexgo.features.company.domain.usecases.GetCompanyHistoryUseCase
 import dev.robert.spacexgo.features.company.domain.usecases.GetCompanyInfoUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -16,10 +18,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CompanyViewModel @Inject constructor(
-    private val useCase: GetCompanyInfoUseCase
+    private val companyInfoUseCase: GetCompanyInfoUseCase,
+    private val companyHistoryUseCase: GetCompanyHistoryUseCase
 ) : ViewModel() {
     private val _companyInfoState = mutableStateOf(CompanyInfoState())
     val companyInfoState = _companyInfoState as State<CompanyInfoState>
+
+    private val _companyHistoryState = mutableStateOf(CompanyHistoryState())
+    val companyHistoryState = _companyHistoryState as State<CompanyHistoryState>
 
     private val _uiEvent = MutableSharedFlow<UiEvents>()
     val uiEvent = _uiEvent
@@ -29,7 +35,7 @@ class CompanyViewModel @Inject constructor(
             isLoading = true
         )
         viewModelScope.launch {
-           useCase().collectLatest { result ->
+           companyInfoUseCase().collectLatest { result ->
                when(result){
                    is Resource.Error -> {
                        _uiEvent.emit(
@@ -53,6 +59,33 @@ class CompanyViewModel @Inject constructor(
                    }
                }
            }
+            _companyHistoryState.value = companyHistoryState.value.copy(
+                isLoading = true
+            )
+            companyHistoryUseCase().collectLatest { result ->
+                when(result){
+                    is Resource.Error -> {
+                        _uiEvent.emit(
+                            UiEvents.ErrorEvent(
+                                message = result.message ?: "Unkown error occurred"
+                            )
+                        )
+                        _companyHistoryState.value = companyHistoryState.value.copy(
+                            error = result.message,
+                            isLoading = false
+                        )
+                    }
+                    is Resource.Success -> {
+                        _companyHistoryState.value = companyHistoryState.value.copy(
+                            data = result.data ?: emptyList(),
+                            isLoading = false
+                        )
+                    }
+                    else -> {
+                        companyHistoryState
+                    }
+                }
+            }
         }
     }
 
@@ -64,5 +97,11 @@ class CompanyViewModel @Inject constructor(
 data class CompanyInfoState(
     val error: String? = null,
     val data : CompanyInfo? = null,
+    val isLoading: Boolean = false
+)
+
+data class CompanyHistoryState(
+    val error: String? = null,
+    val data : List<History> = emptyList(),
     val isLoading: Boolean = false
 )

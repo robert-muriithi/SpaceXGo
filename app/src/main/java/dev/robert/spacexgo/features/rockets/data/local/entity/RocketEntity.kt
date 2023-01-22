@@ -7,7 +7,6 @@ import dev.robert.spacexgo.core.utils.Constants
 @Entity(tableName = Constants.ROCKETS_TABLE)
 data class RocketEntity(
     val active: Boolean,
-    val costPerLaunch: Int,
     val country: String,
     val description: String,
     val flickrImages: List<String>,

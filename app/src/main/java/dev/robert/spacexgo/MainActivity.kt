@@ -32,6 +32,7 @@ import dev.robert.spacexgo.features.destinations.*
 import dev.robert.spacexgo.ui.theme.SpaceXGoTheme
 import dev.robert.spacexgo.ui.theme.contentColor
 import dev.robert.spacexgo.ui.theme.darkGrey
+import dev.robert.spacexgo.ui.theme.lightBlue
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -96,7 +97,7 @@ class MainActivity : ComponentActivity() {
                                                 Text(text = item.label, overflow = TextOverflow.Ellipsis, fontSize = 10.sp)
                                             },
                                             alwaysShowLabel = true,
-                                            selectedContentColor = Color(0xFFE5E5E5),
+                                            selectedContentColor = lightBlue,
                                             unselectedContentColor = Color(0xFFe9e9e9),
                                             selected = currentDestination?.route?.contains(item.destination.route) == true,
 

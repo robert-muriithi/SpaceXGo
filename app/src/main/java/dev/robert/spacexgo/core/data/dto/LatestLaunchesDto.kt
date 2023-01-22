@@ -12,10 +12,6 @@ data class LatestLaunchesDto(
     val crew: List<CrewDto>,
     @SerializedName("details")
     val details: Any,
-    @SerializedName("failures")
-    val failures: List<Any>,
-    @SerializedName("fairings")
-    val fairings: Any,
     @SerializedName("flight_number")
     val flightNumber: Int,
     @SerializedName("id")
@@ -28,6 +24,5 @@ data class LatestLaunchesDto(
     val payloads: List<String>,
     @SerializedName("rocket")
     val rocket: String,
-    @SerializedName("ships")
-    val ships: List<Any>,
+
 )

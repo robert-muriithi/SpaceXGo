@@ -7,7 +7,6 @@ import dev.robert.spacexgo.features.rockets.domain.model.Rocket
 fun RocketsDto.toRocketsEntity() : RocketEntity{
     return RocketEntity(
         active = active,
-        costPerLaunch = costPerLaunch,
         country = country,
         description = description,
         flickrImages = flickrImages,
@@ -22,7 +21,6 @@ fun RocketsDto.toRocketsEntity() : RocketEntity{
 fun RocketEntity.toRocket() : Rocket{
     return Rocket(
         active = active,
-        costPerLaunch = costPerLaunch,
         country = country,
         description = description,
         flickrImages = flickrImages,

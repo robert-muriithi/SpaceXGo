@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dev.robert.spacexgo.features.company.data.local.entity.CompanyLinksEntity
 import dev.robert.spacexgo.features.company.data.local.entity.HeadquarterEntity
+import dev.robert.spacexgo.features.company.data.local.entity.HistoryLinksEntity
 
 @ProvidedTypeConverter
 class Converters(
@@ -45,5 +46,14 @@ class Converters(
     @TypeConverter
     fun toCompanyLinks(json: String) : CompanyLinksEntity {
         return gson.fromJson(json, CompanyLinksEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromHistoryLinks(historyLinksEntity: HistoryLinksEntity) : String{
+        return gson.toJson(historyLinksEntity)
+    }
+    @TypeConverter
+    fun toHistoryLinks(json: String) : HistoryLinksEntity {
+        return gson.fromJson(json, HistoryLinksEntity::class.java)
     }
 }

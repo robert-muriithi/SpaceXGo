@@ -2,6 +2,7 @@ package dev.robert.spacexgo.features.rockets.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,9 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -22,12 +28,12 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.rockets.domain.model.Rocket
+import dev.robert.spacexgo.ui.theme.darkGrey
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 @Destination
 fun RocketsScreen(
-    navigator: DestinationsNavigator,
     viewModel: RocketsViewModel = hiltViewModel(),
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -133,29 +139,72 @@ fun RocketItem(
     rocket: Rocket,
 ) {
     Card(
+        elevation = 1.dp,
         modifier = Modifier.fillMaxWidth()
+            .padding(8.dp)
     ) {
         RocketCardContent(rocket)
     }
 }
 
 @Composable
-private fun RocketCardContent(rocket: Rocket) {
-    Row {
-        Image(
-            painter = rememberAsyncImagePainter(
-                ImageRequest.Builder(LocalContext.current)
-                    .data(
-                        rocket.flickrImages[0]
-                    )
-                    .apply(block = fun ImageRequest.Builder.() {
-                        crossfade(true)
-                    }).build()
+private fun RocketCardContent(
+    rocket: Rocket,
+    modifier : Modifier = Modifier
+) {
+    Row(
+        horizontalArrangement = Arrangement.Start,
+        verticalAlignment = Alignment.Top
+    ) {
+        Box(
+            modifier = modifier
+                .height(120.dp)
+                .width(80.dp)
+        ){
+            Image(
+                painter = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(
+                            rocket.flickrImages[0]
+                        )
+                        .apply(block = fun ImageRequest.Builder.() {
+                            crossfade(true)
+                        }).build()
 
-            ), modifier = Modifier
-                .size(70.dp),
-            contentDescription = null
-        )
-        Text(text = rocket.name)
+                ), modifier = Modifier
+                    .fillMaxSize(),
+                contentDescription = null
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colorStops = arrayOf(
+                                Pair(0.3f, Color.Transparent),
+                                Pair(1.5f, darkGrey)
+                            )
+                        )
+                    )
+            )
+            Column(
+                Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Bottom,
+            ) {
+                Text(
+                    text = rocket.name,
+                    maxLines = 1,
+                    fontSize = 16.sp,
+                    color = White,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+            }
+
+        }
+        Spacer(modifier = Modifier.width(10.dp))
+        Text(text = rocket.description)
+
     }
 }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "e22f423af73ef160c7adca02ce7b4c0f",
+    "identityHash": "cb95fea3dce3c652102a81d673b927c0",
     "entities": [
       {
         "tableName": "ships_table",
@@ -167,17 +167,11 @@
       },
       {
         "tableName": "rockets_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`active` INTEGER NOT NULL, `costPerLaunch` INTEGER NOT NULL, `country` TEXT NOT NULL, `description` TEXT NOT NULL, `flickrImages` TEXT NOT NULL, `id` TEXT NOT NULL, `name` TEXT NOT NULL, `stages` INTEGER NOT NULL, `successRatePct` INTEGER NOT NULL, `type` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`active` INTEGER NOT NULL, `country` TEXT NOT NULL, `description` TEXT NOT NULL, `flickrImages` TEXT NOT NULL, `id` TEXT NOT NULL, `name` TEXT NOT NULL, `stages` INTEGER NOT NULL, `successRatePct` INTEGER NOT NULL, `type` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "active",
             "columnName": "active",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "costPerLaunch",
-            "columnName": "costPerLaunch",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -348,12 +342,56 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "history_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`details` TEXT NOT NULL, `eventDateUtc` TEXT NOT NULL, `id` TEXT NOT NULL, `links` TEXT NOT NULL, `title` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "details",
+            "columnName": "details",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "eventDateUtc",
+            "columnName": "eventDateUtc",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "links",
+            "columnName": "links",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e22f423af73ef160c7adca02ce7b4c0f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cb95fea3dce3c652102a81d673b927c0')"
     ]
   }
 }

@@ -128,4 +128,10 @@ dependencies {
 
     debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
     releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+
+    //Collapsing toolbar
+    implementation "me.onebone:toolbar-compose:2.3.5"
+
+    //Accompanist pager
+    implementation "com.google.accompanist:accompanist-pager:0.24.10-beta"
 }

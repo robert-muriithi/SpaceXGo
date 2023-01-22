@@ -6,8 +6,6 @@ import com.google.gson.annotations.SerializedName
 data class RocketsDto(
     @SerializedName("active")
     val active: Boolean,
-    @SerializedName("company")
-    val costPerLaunch: Int,
     @SerializedName("country")
     val country: String,
     @SerializedName("description")

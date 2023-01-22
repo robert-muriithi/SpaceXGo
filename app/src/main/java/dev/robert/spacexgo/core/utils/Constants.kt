@@ -7,4 +7,5 @@ object Constants {
     const val CAPSULES_TABLE = "capsules_table"
     const val ROCKETS_TABLE = "rockets_table"
     const val COMPANY_INFO_TABLE = "company_info_table"
+    const val HISTORY_TABLE = "history_table"
 }

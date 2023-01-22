@@ -1,14 +1,8 @@
 package dev.robert.spacexgo.features.company.data.mappers
 
-import dev.robert.spacexgo.core.data.dto.CompanyInfoDto
-import dev.robert.spacexgo.core.data.dto.CompanyLinksDto
-import dev.robert.spacexgo.core.data.dto.HeadquartersDto
-import dev.robert.spacexgo.features.company.data.local.entity.CompanyInfoEntity
-import dev.robert.spacexgo.features.company.data.local.entity.CompanyLinksEntity
-import dev.robert.spacexgo.features.company.data.local.entity.HeadquarterEntity
-import dev.robert.spacexgo.features.company.domain.model.CompanyInfo
-import dev.robert.spacexgo.features.company.domain.model.CompanyLinks
-import dev.robert.spacexgo.features.company.domain.model.Headquarters
+import dev.robert.spacexgo.core.data.dto.*
+import dev.robert.spacexgo.features.company.data.local.entity.*
+import dev.robert.spacexgo.features.company.domain.model.*
 
 fun CompanyInfoDto.toCompanyEntity() : CompanyInfoEntity {
     return CompanyInfoEntity(
@@ -83,5 +77,37 @@ fun CompanyLinksEntity.toCompanyLinks() : CompanyLinks{
         flickr = flickr,
         twitter = twitter,
         website = website
+    )
+}
+
+fun HistoryDto.toHistoryEntity() : HistoryEntity {
+    return HistoryEntity(
+        details = details,
+        eventDateUtc = eventDateUtc,
+        id = id,
+        links = links.toHistoryEntity(),
+        title = title
+    )
+}
+
+fun HistoryEntity.toHistory() : History {
+    return History(
+        details = details,
+        eventDateUtc = eventDateUtc,
+        id = id,
+        links = links.toHistoryLinks(),
+        title = title
+    )
+}
+
+fun HistoryLinksDto.toHistoryEntity() : HistoryLinksEntity {
+    return HistoryLinksEntity(
+        article = article,
+    )
+}
+
+fun HistoryLinksEntity.toHistoryLinks() : HistoryLinks {
+    return HistoryLinks(
+        article = article,
     )
 }
