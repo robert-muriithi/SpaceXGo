@@ -2,9 +2,11 @@ package dev.robert.spacexgo.features.ships.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -12,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
@@ -135,8 +138,14 @@ private fun BoxScope.ShipsLoadingStateComponent(state: ShipsState) {
 fun ShipItem(ship: Ship) {
     Card(
         modifier = Modifier.fillMaxWidth()
+            .padding(horizontal = 10.dp, vertical = 5.dp)
+            .clickable {
+
+            }
     ) {
-        Row {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
             Image(
                 painter = rememberAsyncImagePainter(
                     ImageRequest.Builder(LocalContext.current)
@@ -148,7 +157,8 @@ fun ShipItem(ship: Ship) {
                         }).build()
                 ),
                 modifier = Modifier
-                    .size(70.dp),
+                    .size(50.dp)
+                    .clip(shape = RoundedCornerShape(50.dp)),
                 contentDescription = null
             )
             Text(text = ship.name)

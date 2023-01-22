@@ -109,7 +109,6 @@ fun CompanyInfoScreenContent(
         scrollStrategy = ScrollStrategy.ExitUntilCollapsed,
         toolbar = {
             val textSize = (13 + (25 - 7) * scaffoldState.toolbarState.progress).sp
-
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -163,7 +162,7 @@ fun CompanyInfoScreenContent(
                 pagerState.animateScrollToPage(newPosition)
             }
 
-        }
+        },
     ) {
 
         Box(modifier = Modifier.fillMaxSize()) {
@@ -198,7 +197,7 @@ fun CompanyInfoScreenContent(
 
 @Composable
 fun HistoryItem(history: History, count: Int) {
-    val url = history.links.article
+    val url = history.links.article ?: "https://www.spacex.com/news"
     val context = LocalContext.current
     val intent = remember {Intent(Intent.ACTION_VIEW, Uri.parse(url))}
     Card(
