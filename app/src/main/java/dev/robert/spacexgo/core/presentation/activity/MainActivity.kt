@@ -1,4 +1,4 @@
-package dev.robert.spacexgo
+package dev.robert.spacexgo.core.presentation.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,20 +7,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavGraph
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
@@ -29,10 +25,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.spacexgo.core.presentation.common.BottomNavItem
 import dev.robert.spacexgo.features.NavGraphs
 import dev.robert.spacexgo.features.destinations.*
-import dev.robert.spacexgo.ui.theme.SpaceXGoTheme
-import dev.robert.spacexgo.ui.theme.contentColor
-import dev.robert.spacexgo.ui.theme.darkGrey
-import dev.robert.spacexgo.ui.theme.lightBlue
+import dev.robert.spacexgo.core.presentation.theme.SpaceXGoTheme
+import dev.robert.spacexgo.core.presentation.theme.contentColor
+import dev.robert.spacexgo.core.presentation.theme.darkGrey
+import dev.robert.spacexgo.core.presentation.theme.lightBlue
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

@@ -18,7 +18,10 @@ fun ShipEntity.toShip(): Ship {
         speedKn = speedKn,
         status = status,
         type = type,
-        yearBuilt = yearBuilt
+        yearBuilt = yearBuilt,
+        homePort = homePort,
+        legacyId = legacyId,
+        link = link
     )
 }
 
@@ -36,6 +39,9 @@ fun ShipsDto.toShipEntity(): ShipEntity {
         speedKn = speedKn,
         status = status,
         type = type,
-        yearBuilt = yearBuilt
+        yearBuilt = yearBuilt,
+        homePort = homePort,
+        legacyId = legacyId,
+        link = link,
     )
 }

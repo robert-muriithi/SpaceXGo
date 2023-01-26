@@ -20,5 +20,8 @@ data class ShipEntity(
     val speedKn: String?,
     val status: String?,
     val type: String?,
-    val yearBuilt: Int
+    val yearBuilt: Int,
+    val homePort: String?,
+    val legacyId: String?,
+    val link : String?,
 )

@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,14 +27,16 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.rockets.domain.model.Rocket
-import dev.robert.spacexgo.ui.theme.darkGrey
+import dev.robert.spacexgo.core.presentation.theme.darkGrey
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 @Destination
 fun RocketsScreen(
+    navigator: DestinationsNavigator,
     viewModel: RocketsViewModel = hiltViewModel(),
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -69,7 +72,9 @@ private fun RocketScreenContent(
                     Text(text = "Rockets")
                 },
                 actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = {
+
+                    }) {
                         Icon(
                             imageVector = Icons.Default.Search,
                             contentDescription = null

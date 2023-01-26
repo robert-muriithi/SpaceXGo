@@ -40,9 +40,9 @@ import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.company.domain.model.History
 import dev.robert.spacexgo.features.ships.presentation.*
-import dev.robert.spacexgo.ui.theme.darkBlue
-import dev.robert.spacexgo.ui.theme.darkGrey
-import dev.robert.spacexgo.ui.theme.lightBlue
+import dev.robert.spacexgo.core.presentation.theme.darkBlue
+import dev.robert.spacexgo.core.presentation.theme.darkGrey
+import dev.robert.spacexgo.core.presentation.theme.lightBlue
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import me.onebone.toolbar.*

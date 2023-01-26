@@ -29,7 +29,7 @@ data class ShipsDto(
     @SerializedName("legacy_id")
     val legacyId: String,
     @SerializedName("link")
-    val link: String,
+    val link: String?,
     @SerializedName("longitude")
     val longitude: Double,
     @SerializedName("mass_kg")
@@ -51,5 +51,6 @@ data class ShipsDto(
     @SerializedName("type")
     val type: String,
     @SerializedName("year_built")
-    val yearBuilt: Int
+    val yearBuilt: Int,
+
 )

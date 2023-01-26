@@ -22,9 +22,9 @@ class Converters(
     }
 
     @TypeConverter
-    fun toJson(follow: List<String>): String {
+    fun toJson(roles: List<String>): String {
         return gson.toJson(
-            follow,
+            roles,
             object : TypeToken<ArrayList<String>>() {}.type
         ) ?: "[]"
     }

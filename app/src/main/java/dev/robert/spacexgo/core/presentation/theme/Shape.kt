@@ -1,4 +1,4 @@
-package dev.robert.spacexgo.ui.theme
+package dev.robert.spacexgo.core.presentation.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
