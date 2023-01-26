@@ -3,7 +3,11 @@ package dev.robert.spacexgo.features.ships.presentation
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dev.robert.spacexgo.features.ships.domain.model.Ship
+import me.onebone.toolbar.CollapsingToolbarScaffoldState
+import me.onebone.toolbar.CollapsingToolbarState
 import org.junit.Rule
 import org.junit.Test
 
@@ -22,6 +26,7 @@ class ShipsScreenTest {
 
 
     //Expectedbehavior_When_StateUnderTest
+    @OptIn(ExperimentalPagerApi::class)
     @Test
     fun showShipLoadingStateComponent_When_Loading() {
         //Given / Arrange
@@ -33,7 +38,7 @@ class ShipsScreenTest {
 
         // When / Act
         composeTestRule.setContent {
-            ShipScreenContent(scaffoldState = rememberScaffoldState(), state = state)
+            ShipScreenContent(state = state, collapsingToolbarState = CollapsingToolbarScaffoldState(toolbarState = CollapsingToolbarState()))
         }
 
         //Then / Assert
@@ -44,6 +49,7 @@ class ShipsScreenTest {
 
     }
     //Expectedbehavior_When_StateUnderTest
+    @OptIn(ExperimentalPagerApi::class)
     @Test
     fun showShipsEmptyStateComponent_When_Ships_State_is_Empty(){
         // given / arrange
@@ -55,7 +61,7 @@ class ShipsScreenTest {
         // when / act
 
         composeTestRule.setContent {
-            ShipScreenContent(scaffoldState = rememberScaffoldState(), state = state)
+            ShipScreenContent(state = state, collapsingToolbarState = CollapsingToolbarScaffoldState(toolbarState = CollapsingToolbarState()))
         }
 
         //then / assert
@@ -65,6 +71,7 @@ class ShipsScreenTest {
         composeTestRule.onNodeWithTag("ShipsSuccessStateComponent").assertDoesNotExist()
     }
 
+    @OptIn(ExperimentalPagerApi::class)
     @Test
     fun showShipsErrorStateComponent_When_Ships_State_Contains_Error(){
         // given / arrange
@@ -76,7 +83,7 @@ class ShipsScreenTest {
         // when / act
 
         composeTestRule.setContent {
-            ShipScreenContent(scaffoldState = rememberScaffoldState(), state = state)
+            ShipScreenContent(state = state, collapsingToolbarState = CollapsingToolbarScaffoldState(toolbarState = CollapsingToolbarState()))
         }
 
         //then / assert
@@ -86,6 +93,7 @@ class ShipsScreenTest {
         composeTestRule.onNodeWithTag("ShipsSuccessStateComponent").assertDoesNotExist()
     }
 
+    @OptIn(ExperimentalPagerApi::class)
     @Test
     fun showShipsSuccessStateComponent_When_Ships_State_Has_Data(){
         // given / arrange
@@ -97,7 +105,7 @@ class ShipsScreenTest {
         // when / act
 
         composeTestRule.setContent {
-            ShipScreenContent(scaffoldState = rememberScaffoldState(), state = state)
+            ShipScreenContent(state = state, collapsingToolbarState = CollapsingToolbarScaffoldState(toolbarState = CollapsingToolbarState()))
         }
 
         //then / assert
@@ -124,6 +132,8 @@ private val testData = listOf(
         speedKn = "20",
         status = "Active",
         type = "Cargo",
-        yearBuilt = 2000
+        yearBuilt = 2000,
+        homePort = "Port 1",
+        legacyId = "123"
     )
 )
