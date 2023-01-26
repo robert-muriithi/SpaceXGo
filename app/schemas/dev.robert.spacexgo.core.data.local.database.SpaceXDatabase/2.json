@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "cb95fea3dce3c652102a81d673b927c0",
+    "identityHash": "69fdf3bed630e4a5d0674bb1f8517e70",
     "entities": [
       {
         "tableName": "ships_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`active` INTEGER NOT NULL, `id` TEXT NOT NULL, `shipImage` TEXT DEFAULT '', `lastAisUpdate` TEXT, `launches` TEXT NOT NULL, `massKg` INTEGER NOT NULL, `model` TEXT, `name` TEXT NOT NULL, `roles` TEXT NOT NULL, `speedKn` TEXT, `status` TEXT, `type` TEXT, `yearBuilt` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`active` INTEGER NOT NULL, `id` TEXT NOT NULL, `shipImage` TEXT DEFAULT '', `lastAisUpdate` TEXT, `launches` TEXT NOT NULL, `massKg` INTEGER NOT NULL, `model` TEXT, `name` TEXT NOT NULL, `roles` TEXT NOT NULL, `speedKn` TEXT, `status` TEXT, `type` TEXT, `yearBuilt` INTEGER NOT NULL, `homePort` TEXT, `legacyId` TEXT, `link` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "active",
@@ -86,6 +86,24 @@
             "columnName": "yearBuilt",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "homePort",
+            "columnName": "homePort",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "legacyId",
+            "columnName": "legacyId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "link",
+            "columnName": "link",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -391,7 +409,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cb95fea3dce3c652102a81d673b927c0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '69fdf3bed630e4a5d0674bb1f8517e70')"
     ]
   }
 }
