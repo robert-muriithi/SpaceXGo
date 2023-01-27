@@ -14,6 +14,8 @@ import dev.robert.spacexgo.features.company.data.local.dao.CompanyInfoDao
 import dev.robert.spacexgo.features.company.data.local.dao.HistoryDao
 import dev.robert.spacexgo.features.company.data.local.entity.CompanyInfoEntity
 import dev.robert.spacexgo.features.company.data.local.entity.HistoryEntity
+import dev.robert.spacexgo.features.launches.data.local.dao.LaunchesDao
+import dev.robert.spacexgo.features.launches.data.local.entity.LaunchesEntity
 import dev.robert.spacexgo.features.rockets.data.local.dao.RocketsDao
 import dev.robert.spacexgo.features.rockets.data.local.entity.RocketEntity
 import dev.robert.spacexgo.features.ships.data.converters.Converters
@@ -26,7 +28,8 @@ import dev.robert.spacexgo.features.ships.data.local.entity.ShipEntity
         CapsulesEntity::class,
         RocketEntity::class,
         CompanyInfoEntity::class,
-        HistoryEntity::class],
+        HistoryEntity::class,
+        LaunchesEntity::class],
     version = 2,
     autoMigrations = [
         AutoMigration(from = 1, to = 2, spec = SpaceXDatabase.Migration1To2::class)
@@ -36,10 +39,11 @@ import dev.robert.spacexgo.features.ships.data.local.entity.ShipEntity
 @TypeConverters(Converters::class)
 abstract class SpaceXDatabase : RoomDatabase() {
     abstract val shipDao: ShipDao
-    abstract val capsulesDao : CapsulesDao
-    abstract val rocketsDao : RocketsDao
+    abstract val capsulesDao: CapsulesDao
+    abstract val rocketsDao: RocketsDao
     abstract val companyInfoDao: CompanyInfoDao
-    abstract val historyDao : HistoryDao
+    abstract val historyDao: HistoryDao
+    abstract val launchesDao: LaunchesDao
 
     @RenameColumn(
         tableName = Constants.SHIP_TABLE,

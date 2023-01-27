@@ -4,6 +4,8 @@ import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import dev.robert.spacexgo.core.data.dto.CrewDto
+import dev.robert.spacexgo.core.data.dto.LinksDto
 import dev.robert.spacexgo.features.company.data.local.entity.CompanyLinksEntity
 import dev.robert.spacexgo.features.company.data.local.entity.HeadquarterEntity
 import dev.robert.spacexgo.features.company.data.local.entity.HistoryLinksEntity
@@ -56,4 +58,32 @@ class Converters(
     fun toHistoryLinks(json: String) : HistoryLinksEntity {
         return gson.fromJson(json, HistoryLinksEntity::class.java)
     }
+
+    @TypeConverter
+    fun fromLinksDto(linksDto: LinksDto) : String{
+        return gson.toJson(linksDto)
+    }
+
+    @TypeConverter
+    fun toLinksDto(json: String) : LinksDto {
+        return gson.fromJson(json, LinksDto::class.java)
+    }
+
+
+    @TypeConverter
+    fun fromCrewDto(json: String): List<CrewDto> {
+        return gson.fromJson<ArrayList<CrewDto>>(
+            json,
+            object : TypeToken<ArrayList<CrewDto>>() {}.type
+        ) ?: emptyList()
+    }
+
+    @TypeConverter
+    fun toCrewDto(crew: List<CrewDto>): String {
+        return gson.toJson(
+            crew,
+            object : TypeToken<ArrayList<CrewDto>>() {}.type
+        ) ?: "[]"
+    }
+
 }

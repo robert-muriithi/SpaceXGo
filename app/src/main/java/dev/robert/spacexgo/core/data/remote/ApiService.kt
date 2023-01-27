@@ -19,10 +19,6 @@ interface ApiService {
     @GET("v5/launches")
     suspend fun getAllLaunches() : List<LaunchesDto>
 
-    @GET("v5/launches/latest")
-    suspend fun getLatestLaunches() : List<LatestLaunchesDto>
-
     @GET("v4/history")
     suspend fun getCompanyHistory() : List<HistoryDto>
-
 }
