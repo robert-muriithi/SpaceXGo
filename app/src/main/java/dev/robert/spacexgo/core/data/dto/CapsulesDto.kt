@@ -11,7 +11,7 @@ data class CapsulesDto(
     @SerializedName("last_update")
     val lastUpdate: String,
     @SerializedName("launches")
-    val launches: List<String>,
+    val launches: List<String?>,
     @SerializedName("reuse_count")
     val reuseCount: Int,
     @SerializedName("serial")

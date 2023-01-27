@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "69fdf3bed630e4a5d0674bb1f8517e70",
+    "identityHash": "a1221ac4da2cd6b7743fa2d4f50d467f",
     "entities": [
       {
         "tableName": "ships_table",
@@ -404,12 +404,140 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "launches_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`autoUpdate` INTEGER NOT NULL, `capsules` TEXT NOT NULL, `dateLocal` TEXT NOT NULL, `datePrecision` TEXT NOT NULL, `dateUtc` TEXT NOT NULL, `details` TEXT, `flightNumber` INTEGER NOT NULL, `id` TEXT NOT NULL, `launchLibraryId` TEXT, `launchpad` TEXT NOT NULL, `linksDto` TEXT NOT NULL, `name` TEXT NOT NULL, `net` INTEGER NOT NULL, `payloads` TEXT NOT NULL, `rocket` TEXT NOT NULL, `ships` TEXT NOT NULL, `success` INTEGER NOT NULL, `upcoming` INTEGER NOT NULL, `crew` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "autoUpdate",
+            "columnName": "autoUpdate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "capsules",
+            "columnName": "capsules",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateLocal",
+            "columnName": "dateLocal",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "datePrecision",
+            "columnName": "datePrecision",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateUtc",
+            "columnName": "dateUtc",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "details",
+            "columnName": "details",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "flightNumber",
+            "columnName": "flightNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "launchLibraryId",
+            "columnName": "launchLibraryId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "launchpad",
+            "columnName": "launchpad",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "linksDto",
+            "columnName": "linksDto",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "net",
+            "columnName": "net",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "payloads",
+            "columnName": "payloads",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rocket",
+            "columnName": "rocket",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ships",
+            "columnName": "ships",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "success",
+            "columnName": "success",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "upcoming",
+            "columnName": "upcoming",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "crew",
+            "columnName": "crew",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '69fdf3bed630e4a5d0674bb1f8517e70')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a1221ac4da2cd6b7743fa2d4f50d467f')"
     ]
   }
 }
