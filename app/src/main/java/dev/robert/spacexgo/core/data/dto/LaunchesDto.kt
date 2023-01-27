@@ -17,7 +17,7 @@ data class LaunchesDto(
     @SerializedName("date_utc")
     val dateUtc: String,
     @SerializedName("details")
-    val details: Any,
+    val details: String?,
     @SerializedName("failures")
     val failures: List<Any>,
     @SerializedName("fairings")
@@ -27,7 +27,7 @@ data class LaunchesDto(
     @SerializedName("id")
     val id: String,
     @SerializedName("launch_library_id")
-    val launchLibraryId: String,
+    val launchLibraryId: String?,
     @SerializedName("launchpad")
     val launchpad: String,
     @SerializedName("links")
@@ -41,7 +41,7 @@ data class LaunchesDto(
     @SerializedName("rocket")
     val rocket: String,
     @SerializedName("ships")
-    val ships: List<Any>,
+    val ships: List<String?>,
     @SerializedName("static_fire_date_unix")
     val staticFireDateUnix: Any,
     @SerializedName("static_fire_date_utc")
@@ -53,5 +53,7 @@ data class LaunchesDto(
     @SerializedName("upcoming")
     val upcoming: Boolean,
     @SerializedName("window")
-    val window: Any
+    val window: Any,
+    @SerializedName("crew")
+    val crew: List<CrewDto>,
 )
