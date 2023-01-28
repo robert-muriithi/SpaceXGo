@@ -206,7 +206,7 @@ fun ShipDetailTopBar(shipData: Ship) {
 
 @Composable
 fun ShipDetailContent(shipData: Ship) {
-    val url = shipData.link
+    val url = shipData.link ?: "www.spacex.com"
     val context = LocalContext.current
     val intent = remember { Intent(Intent.ACTION_VIEW, Uri.parse(url)) }
     Card(
