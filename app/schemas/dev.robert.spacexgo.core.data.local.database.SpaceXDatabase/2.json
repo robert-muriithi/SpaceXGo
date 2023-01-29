@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "a1221ac4da2cd6b7743fa2d4f50d467f",
+    "identityHash": "db990def04a942d6b507351dcd98d8ab",
     "entities": [
       {
         "tableName": "ships_table",
@@ -407,7 +407,7 @@
       },
       {
         "tableName": "launches_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`autoUpdate` INTEGER NOT NULL, `capsules` TEXT NOT NULL, `dateLocal` TEXT NOT NULL, `datePrecision` TEXT NOT NULL, `dateUtc` TEXT NOT NULL, `details` TEXT, `flightNumber` INTEGER NOT NULL, `id` TEXT NOT NULL, `launchLibraryId` TEXT, `launchpad` TEXT NOT NULL, `linksDto` TEXT NOT NULL, `name` TEXT NOT NULL, `net` INTEGER NOT NULL, `payloads` TEXT NOT NULL, `rocket` TEXT NOT NULL, `ships` TEXT NOT NULL, `success` INTEGER NOT NULL, `upcoming` INTEGER NOT NULL, `crew` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`autoUpdate` INTEGER NOT NULL, `capsules` TEXT NOT NULL, `dateLocal` TEXT NOT NULL, `datePrecision` TEXT NOT NULL, `dateUtc` TEXT NOT NULL, `details` TEXT, `flightNumber` INTEGER NOT NULL, `id` TEXT NOT NULL, `launchLibraryId` TEXT, `launchpad` TEXT NOT NULL, `linksDto` TEXT, `name` TEXT NOT NULL, `net` INTEGER NOT NULL, `payloads` TEXT NOT NULL, `rocket` TEXT NOT NULL, `ships` TEXT NOT NULL, `success` INTEGER NOT NULL, `upcoming` INTEGER NOT NULL, `crew` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "autoUpdate",
@@ -473,7 +473,7 @@
             "fieldPath": "linksDto",
             "columnName": "linksDto",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "name",
@@ -537,7 +537,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a1221ac4da2cd6b7743fa2d4f50d467f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'db990def04a942d6b507351dcd98d8ab')"
     ]
   }
 }

@@ -7,9 +7,9 @@ data class LinksDto(
     @SerializedName("article")
     val article: Any,
     @SerializedName("flickr")
-    val flickr: FlickrDto,
+    val flickr: FlickrDto?,
     @SerializedName("patch")
-    val patchDto: PatchDto,
+    val patchDto: PatchDto?,
     @SerializedName("presskit")
     val presskit: Any,
     @SerializedName("reddit")

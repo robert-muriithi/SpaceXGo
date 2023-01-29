@@ -1,12 +1,14 @@
-package dev.robert.spacexgo.features.launches.presentation
+package dev.robert.spacexgo.features.launches.presentation.launches
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -16,17 +18,22 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.presentation.theme.darkBlue
 import dev.robert.spacexgo.core.presentation.theme.darkGrey
 import dev.robert.spacexgo.features.launches.domain.model.Launches
@@ -41,7 +48,6 @@ fun LaunchesScreen(
     val scaffoldState = rememberScaffoldState()
     val categories = listOf("All", "Past", "Upcoming")
     val state = viewModel.launchState.value
-
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -121,8 +127,9 @@ private fun CategoriesSection(
                             shape = RoundedCornerShape(8.dp)
                         )
                         .background(
-                           color = if (categories.indexOf(category) == selectedIndex) darkBlue else Color.Transparent
-                        ).width(80.dp)
+                            color = if (categories.indexOf(category) == selectedIndex) darkBlue else Color.Transparent
+                        )
+                        .width(80.dp)
                 ) {
                     Text(
                         text = category,
@@ -196,24 +203,105 @@ fun LaunchesSuccessStateComponent(
     viewModel: LaunchesViewModel
 ) {
     if (!state.isLoading && state.message == null && state.launches.isNotEmpty()) {
-        LazyColumn(modifier = Modifier.testTag("LaunchesSuccessStateComponent")) {
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(3),
+            contentPadding = PaddingValues(8.dp),
+            modifier = Modifier
+                .testTag("LaunchesSuccessStateComponent")
+                .background(color = darkGrey)
+        ) {
             items(state.launches) { item ->
-                LaunchItem(launch = item, navigator = navigator)
+                LaunchItem(
+                    launch = item,
+                    navigator = navigator,
+                    viewModel = viewModel
+                )
             }
         }
     }
 }
 
 @Composable
-fun LaunchItem(launch: Launches, navigator: DestinationsNavigator) {
+fun LaunchItem(
+    launch: Launches,
+    navigator: DestinationsNavigator,
+    viewModel: LaunchesViewModel
+) {
     Card(
         modifier = Modifier
-            .fillMaxSize()
+            .width(80.dp)
+            .height(170.dp)
+            .padding(8.dp)
             .testTag("LaunchItem")
             .clickable {
 
             }
     ) {
-        Text(text = launch.name)
+        Box(modifier = Modifier.fillMaxSize()) {
+            val painter = rememberAsyncImagePainter(
+                ImageRequest.Builder(LocalContext.current)
+                    .data(
+                        data = launch.linksDto?.patchDto?.large
+                            ?: launch.linksDto?.patchDto?.small
+                    )
+                    .placeholder(R.drawable.ic_launches)
+                    .apply(block = fun ImageRequest.Builder.() {
+                        crossfade(true)
+
+                    }).build()
+            )
+
+            Image(
+                painter = painter,
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp),
+                contentScale = ContentScale.Fit,
+            )
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.TopStart
+            ){
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp)
+                ) {
+                    Text(
+                        text = "#${launch.flightNumber}",
+                        color = darkGrey,
+                        fontSize = 12.sp
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(5.dp),
+                contentAlignment = Alignment.BottomStart
+            ) {
+                Column(modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.Bottom,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = launch.name,
+                        maxLines = 1,
+                        fontSize = 14.sp,
+                        color = darkBlue,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = if (launch.success) "Successful" else "Failed",
+                        fontSize = 12.sp,
+                        color = darkBlue,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+        }
     }
 }

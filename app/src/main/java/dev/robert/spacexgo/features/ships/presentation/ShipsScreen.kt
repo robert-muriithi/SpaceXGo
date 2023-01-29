@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -32,6 +33,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImagePainter
+import coil.compose.ImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
@@ -124,25 +127,35 @@ fun ShipScreenContent(
                     modifier = Modifier
                         .fillMaxSize()
                 ) { page ->
-                    Image(
-                        painter = rememberAsyncImagePainter(
-                            ImageRequest.Builder(LocalContext.current)
-                                .data(
-                                    data = images[page]
-                                )
-                                .apply(block = fun ImageRequest.Builder.() {
-                                    crossfade(true)
+                    val painter = rememberAsyncImagePainter(
+                        ImageRequest.Builder(LocalContext.current)
+                            .data(
+                                data = images[page]
+                            )
+                            .apply(block = fun ImageRequest.Builder.() {
+                                crossfade(true)
 
-                                }).build()
-                        ),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .height(200.dp)
-                            .fillMaxWidth()
-                            .pin(),
-                        contentScale = ContentScale.Crop,
-                        alpha = if (textSize.value < 18f) 0f else 1f
+                            }).build()
                     )
+
+                    val painterState = painter.state
+                    /*if(painterState is AsyncImagePainter.State.Loading){
+                        CircularProgressIndicator(
+                            modifier = Modifier.align(Alignment.Center),
+                            color = White
+                        )*/
+                    /*}else {*/
+                        Image(
+                            painter = painter,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .height(200.dp)
+                                .fillMaxWidth()
+                                .pin(),
+                            contentScale = ContentScale.Crop,
+                            alpha = if (textSize.value < 18f) 0f else 1f
+                        )
+                    /*}*/
 
                 }
             }
@@ -162,7 +175,7 @@ fun ShipScreenContent(
 
                 )
             LaunchedEffect(pagerState.currentPage) {
-                delay(5000) // wait for 5 seconds.
+                delay(10000) // wait for 5 seconds.
                 // increasing the position and check the limit
                 var newPosition = pagerState.currentPage + 1
                 if (newPosition > images.lastIndex) newPosition = 0
@@ -253,23 +266,33 @@ fun ShipItem(ship: Ship, navigator: DestinationsNavigator) {
                     .fillMaxHeight()
                     .width(70.dp)
             ) {
-                Image(
-                    painter = rememberAsyncImagePainter(
-                        ImageRequest.Builder(LocalContext.current)
-                            .data(
-                                data = ship.image
-                            )
-                            .apply(block = fun ImageRequest.Builder.() {
-                                crossfade(true)
-                                    .placeholder(R.drawable.ic_ships)
-                                    .error(R.drawable.ic_ships)
-                            }).build()
-                    ),
 
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize(),
-                    contentDescription = null
+                val painter = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(
+                            data = ship.image
+                        )
+                        .apply(block = fun ImageRequest.Builder.() {
+                            crossfade(true)
+                        }).build()
                 )
+                val painterState = painter.state
+                if(painterState is AsyncImagePainter.State.Loading){
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+                if(painterState is AsyncImagePainter.State.Success){
+                    Image(
+                        painter = painter,
+
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.fillMaxSize(),
+                        contentDescription = null
+                    )
+
+                }
+
             }
             Column(
                 modifier = Modifier.padding(horizontal = 5.dp),

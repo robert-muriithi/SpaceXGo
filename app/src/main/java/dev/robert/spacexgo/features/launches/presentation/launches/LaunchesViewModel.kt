@@ -1,4 +1,4 @@
-package dev.robert.spacexgo.features.launches.presentation
+package dev.robert.spacexgo.features.launches.presentation.launches
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -9,7 +9,6 @@ import dev.robert.spacexgo.core.utils.Resource
 import dev.robert.spacexgo.features.launches.domain.model.Launches
 import dev.robert.spacexgo.features.launches.domain.usecase.GetAllLaunchesUseCase
 import dev.robert.spacexgo.features.launches.domain.usecase.GetPastLaunchesUseCase
-import dev.robert.spacexgo.features.launches.domain.usecase.GetSingleLaunchUseCase
 import dev.robert.spacexgo.features.launches.domain.usecase.GetUpcomingLaunchesUseCase
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
