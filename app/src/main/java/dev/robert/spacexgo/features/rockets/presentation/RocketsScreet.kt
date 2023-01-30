@@ -3,26 +3,32 @@ package dev.robert.spacexgo.features.rockets.presentation
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.ramcosta.composedestinations.annotation.Destination
@@ -31,6 +37,7 @@ import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.rockets.domain.model.Rocket
 import dev.robert.spacexgo.core.presentation.theme.darkGrey
+import dev.robert.spacexgo.features.destinations.RocketDetailsScreenDestination
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -54,7 +61,7 @@ fun RocketsScreen(
     })
     val state = viewModel.rocketsState.value
 
-    RocketScreenContent(scaffoldState, state)
+    RocketScreenContent(scaffoldState = scaffoldState, state = state, navigator = navigator)
 
 }
 
@@ -63,23 +70,14 @@ fun RocketsScreen(
 private fun RocketScreenContent(
     scaffoldState: ScaffoldState,
     state: RocketsState,
+    navigator: DestinationsNavigator
 ) {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Rockets")
-                },
-                actions = {
-                    IconButton(onClick = {
-
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = null
-                        )
-                    }
+                    Text(text = "Rockets", fontFamily = FontFamily.Serif)
                 },
                 elevation = 1.dp
             )
@@ -92,19 +90,19 @@ private fun RocketScreenContent(
 
             RocketsErrorStateComponent(state)
 
-            RocketsEmptyStateComponet(state)
+            RocketsEmptyStateComponent(state)
 
-            ShipSuccessStateComponent(state)
+            ShipSuccessStateComponent(state, navigator = navigator)
         }
     }
 }
 
 @Composable
-private fun ShipSuccessStateComponent(state: RocketsState) {
+private fun ShipSuccessStateComponent(state: RocketsState, navigator: DestinationsNavigator) {
     if (!state.isLoading && state.error == null && state.rockets.isNotEmpty()) {
         LazyColumn() {
             items(state.rockets) { item ->
-                RocketItem(item)
+                RocketItem(item, navigator = navigator)
             }
         }
     }
@@ -121,7 +119,7 @@ private fun BoxScope.RocketsErrorStateComponent(state: RocketsState) {
 }
 
 @Composable
-private fun BoxScope.RocketsEmptyStateComponet(state: RocketsState) {
+private fun BoxScope.RocketsEmptyStateComponent(state: RocketsState) {
     if (!state.isLoading && state.error != null && state.rockets.isEmpty()) {
         Text(
             text = "No rockets found",
@@ -142,11 +140,17 @@ private fun BoxScope.RocketLoadingStateComponent(state: RocketsState) {
 @Composable
 fun RocketItem(
     rocket: Rocket,
+    navigator: DestinationsNavigator
 ) {
     Card(
         elevation = 1.dp,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp)
             .padding(8.dp)
+            .clickable {
+                navigator.navigate(RocketDetailsScreenDestination(rocket = rocket))
+            }
     ) {
         RocketCardContent(rocket)
     }
@@ -154,62 +158,98 @@ fun RocketItem(
 
 @Composable
 private fun RocketCardContent(
-    rocket: Rocket,
-    modifier : Modifier = Modifier
+    rocket: Rocket
 ) {
     Row(
-        horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.Top
+        modifier = Modifier.fillMaxSize(),
     ) {
         Box(
-            modifier = modifier
-                .height(120.dp)
-                .width(80.dp)
-        ){
-            Image(
-                painter = rememberAsyncImagePainter(
-                    ImageRequest.Builder(LocalContext.current)
-                        .data(
-                            rocket.flickrImages[0]
-                        )
-                        .apply(block = fun ImageRequest.Builder.() {
-                            crossfade(true)
-                        }).build()
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(70.dp)
+        ) {
 
-                ), modifier = Modifier
-                    .fillMaxSize(),
+            val painter = rememberAsyncImagePainter(
+                ImageRequest.Builder(LocalContext.current)
+                    .data(
+                        data = rocket.flickrImages[0]
+                    )
+                    .placeholder(R.drawable.ic_rocket)
+                    .apply(block = fun ImageRequest.Builder.() {
+                        crossfade(true)
+                    }).build()
+            )
+            val painterState = painter.state
+            Image(
+                painter = painter,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize(),
                 contentDescription = null
             )
+
+
+        }
+        Column(
+            modifier = Modifier.padding(horizontal = 5.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = rocket.name,
+                style = TextStyle(
+                    fontSize = 13.sp,
+                    fontFamily = FontFamily.Serif,
+                    fontWeight = FontWeight.Bold
+                ),
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                text = rocket.type ?: "Unknown Model",
+                style = TextStyle(fontSize = 11.sp, fontFamily = FontFamily.Serif)
+            )
+            Text(
+                text = "Stages: ${rocket.stages}",
+                style = TextStyle(fontSize = 11.sp, fontFamily = FontFamily.Serif)
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(vertical = 3.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .size(8.dp)
+                        .background(
+                            if (rocket.active) Color.Green else Color.Red
+                        )
+                )
+                Text(
+                    text = if (rocket.active) "Active" else "Inactive",
+                    modifier = Modifier.padding(horizontal = 3.dp),
+                    style = TextStyle(fontSize = 11.sp, fontFamily = FontFamily.Serif)
+                )
+            }
+        }
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight(),
+            horizontalAlignment = Alignment.End,
+            verticalArrangement = Arrangement.Center
+        ) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            colorStops = arrayOf(
-                                Pair(0.3f, Color.Transparent),
-                                Pair(1.5f, darkGrey)
-                            )
-                        )
-                    )
-            )
-            Column(
-                Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Bottom,
+                    .padding(16.dp)
             ) {
-                Text(
-                    text = rocket.name,
-                    maxLines = 1,
-                    fontSize = 16.sp,
-                    color = White,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.padding(start = 8.dp)
+                Image(
+                    modifier = Modifier
+                        .size(16.dp)
+                        .align(Alignment.CenterEnd),
+                    painter = painterResource(id = R.drawable.arrow_forward),
+                    contentDescription = null
                 )
-                Spacer(modifier = Modifier.height(4.dp))
             }
-
         }
-        Spacer(modifier = Modifier.width(10.dp))
-        Text(text = rocket.description)
 
     }
 }

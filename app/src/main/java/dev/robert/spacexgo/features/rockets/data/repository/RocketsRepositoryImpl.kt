@@ -20,6 +20,7 @@ class RocketsRepositoryImpl(
 ) : RocketsRepository {
 
     override fun getAllRockets(): Flow<Resource<List<Rocket>>> = flow {
+        emit(Resource.Loading())
         val dbRockets = dao.getAllRockets()
         if (dbRockets.isNotEmpty()){
             emit(Resource.Success(data = dbRockets.map { it.toRocket() }))
