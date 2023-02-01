@@ -15,4 +15,8 @@ interface CapsulesDao {
 
     @Query("DELETE FROM capsules_table")
     suspend fun deleteAllCapsules()
+
+    //Search by  capsule serial, capsule status, capsule type
+    @Query("SELECT * FROM capsules_table WHERE serial LIKE :query OR status LIKE :query OR type LIKE :query")
+    fun searchCapsules(query: String) : List<CapsulesEntity>
 }

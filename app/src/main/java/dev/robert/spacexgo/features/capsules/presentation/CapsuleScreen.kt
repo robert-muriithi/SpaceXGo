@@ -33,6 +33,7 @@ import dev.robert.spacexgo.core.presentation.theme.lightBlue
 import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.capsules.domain.model.Capsule
 import dev.robert.spacexgo.features.destinations.CapsuleDetailsScreenDestination
+import dev.robert.spacexgo.features.destinations.CapsulesSearchScreenDestination
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -70,43 +71,6 @@ fun CapsulesScreen(
                 elevation = 1.dp,
                 actions = {
                     IconButton(onClick = {
-                       /* ModalBottomSheetLayout(sheetState = modalBottomSheetState, sheetContent = {
-                            LazyColumn(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .background(Color.White)
-                                    .padding(16.dp)
-                            ) {
-                                items(sortOptions) { option ->
-                                    Text(
-                                        text = option,
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .clickable {
-                                                viewModel.onSortOptionSelected(option)
-                                                modalBottomSheetState.hide()
-                                            }
-                                            .padding(8.dp),
-                                        textAlign = TextAlign.Center,
-                                        style = TextStyle(
-                                            fontFamily = FontFamily.SansSerif,
-                                            fontWeight = FontWeight.Bold,
-                                            fontSize = 16.sp
-                                        )
-                                    )
-                                }
-                            }
-                        }) {
-                            IconButton(onClick = {
-                                modalBottomSheetState.show()
-                            }) {
-                                Icon(
-                                    imageVector = Icons.Default.List,
-                                    contentDescription = "Sort",
-                                    tint = Color.White
-                                )
-                            }
-                        } */
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_sort),
@@ -121,7 +85,7 @@ fun CapsulesScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-
+                    navigator.navigate(CapsulesSearchScreenDestination())
                 }
             ) {
                 Icon(

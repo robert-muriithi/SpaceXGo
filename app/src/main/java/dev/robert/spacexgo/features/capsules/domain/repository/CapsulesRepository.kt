@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CapsulesRepository {
     fun getAllCapsules() : Flow<Resource<List<Capsule>>>
+    fun searchCapsules(query: String) : Flow<Resource<List<Capsule>>>
 }

@@ -9,6 +9,7 @@ import dev.robert.spacexgo.features.capsules.data.local.dao.CapsulesDao
 import dev.robert.spacexgo.features.capsules.data.repository.CapsulesRepositoryImpl
 import dev.robert.spacexgo.features.capsules.domain.repository.CapsulesRepository
 import dev.robert.spacexgo.features.capsules.domain.usecase.GetAllCapsulesUseCase
+import dev.robert.spacexgo.features.capsules.domain.usecase.SearchCapsuleUseCase
 import javax.inject.Singleton
 
 @Module
@@ -33,6 +34,16 @@ object CapsulesModule {
         repository: CapsulesRepository
     ) : GetAllCapsulesUseCase{
         return GetAllCapsulesUseCase(
+            repository = repository
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchCapsuleUseCase(
+        repository: CapsulesRepository
+    ) : SearchCapsuleUseCase {
+        return SearchCapsuleUseCase(
             repository = repository
         )
     }
