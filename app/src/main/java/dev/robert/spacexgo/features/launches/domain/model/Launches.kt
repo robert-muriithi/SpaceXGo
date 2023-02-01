@@ -1,8 +1,12 @@
 package dev.robert.spacexgo.features.launches.domain.model
 
+import android.os.Parcelable
 import dev.robert.spacexgo.core.data.dto.CrewDto
 import dev.robert.spacexgo.core.data.dto.LinksDto
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
+@Parcelize
 data class Launches(
     val autoUpdate: Boolean,
     val capsules: List<String>,
@@ -23,4 +27,4 @@ data class Launches(
     val success: Boolean,
     val upcoming: Boolean,
     val crew: List<CrewDto>,
-)
+) : Parcelable

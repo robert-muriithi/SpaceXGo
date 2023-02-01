@@ -36,6 +36,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.presentation.theme.darkBlue
 import dev.robert.spacexgo.core.presentation.theme.darkGrey
+import dev.robert.spacexgo.features.destinations.LaunchDetailsScreenDestination
 import dev.robert.spacexgo.features.launches.domain.model.Launches
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -213,8 +214,7 @@ fun LaunchesSuccessStateComponent(
             items(state.launches) { item ->
                 LaunchItem(
                     launch = item,
-                    navigator = navigator,
-                    viewModel = viewModel
+                    navigator = navigator
                 )
             }
         }
@@ -224,8 +224,7 @@ fun LaunchesSuccessStateComponent(
 @Composable
 fun LaunchItem(
     launch: Launches,
-    navigator: DestinationsNavigator,
-    viewModel: LaunchesViewModel
+    navigator: DestinationsNavigator
 ) {
     Card(
         modifier = Modifier
@@ -234,7 +233,7 @@ fun LaunchItem(
             .padding(8.dp)
             .testTag("LaunchItem")
             .clickable {
-
+                navigator.navigate(LaunchDetailsScreenDestination(launch = launch))
             }
     ) {
         Box(modifier = Modifier.fillMaxSize()) {

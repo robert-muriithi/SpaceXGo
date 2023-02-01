@@ -9,6 +9,7 @@ import dev.robert.spacexgo.features.rockets.data.local.dao.RocketsDao
 import dev.robert.spacexgo.features.rockets.data.repository.RocketsRepositoryImpl
 import dev.robert.spacexgo.features.rockets.domain.repository.RocketsRepository
 import dev.robert.spacexgo.features.rockets.domain.usecase.GetAllRocketsUseCase
+import dev.robert.spacexgo.features.rockets.domain.usecase.GetSingleRocketUseCase
 import javax.inject.Singleton
 
 @Module
@@ -30,5 +31,11 @@ object RocketModule {
     @Singleton
     fun provideRocketsUseCase(repository: RocketsRepository): GetAllRocketsUseCase {
         return GetAllRocketsUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetSingleRocketUseCase(repository: RocketsRepository) : GetSingleRocketUseCase{
+        return GetSingleRocketUseCase(repository)
     }
 }

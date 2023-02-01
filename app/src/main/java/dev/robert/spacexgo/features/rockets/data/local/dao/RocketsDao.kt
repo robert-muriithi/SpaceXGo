@@ -17,4 +17,7 @@ interface RocketsDao {
     @Query("SELECT * FROM rockets_table")
     fun getAllRockets() : List<RocketEntity>
 
+    @Query("SELECT * FROM rockets_table WHERE id LIKE :id")
+    fun getRocket(id: String) : RocketEntity
+
 }

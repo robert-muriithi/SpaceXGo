@@ -40,4 +40,10 @@ class RocketsRepositoryImpl(
             }
         }
     }.flowOn(Dispatchers.IO)
+
+    override fun getSingleRocket(id: String): Flow<Resource<Rocket>> = flow{
+        emit(Resource.Loading())
+        val rocket = dao.getRocket(id)
+        emit(Resource.Success(rocket.toRocket()))
+    }.flowOn(Dispatchers.IO)
 }

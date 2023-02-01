@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface RocketsRepository {
     fun getAllRockets() : Flow<Resource<List<Rocket>>>
+    fun getSingleRocket(id: String) : Flow<Resource<Rocket>>
 }
