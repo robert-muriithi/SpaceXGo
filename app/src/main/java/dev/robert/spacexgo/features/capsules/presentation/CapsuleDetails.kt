@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
@@ -39,7 +40,7 @@ fun CapsuleDetailsScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Launches")
+                    Text(text = "Launches", fontFamily = FontFamily.Serif)
                 },
                 navigationIcon = {
                   IconButton(onClick = {

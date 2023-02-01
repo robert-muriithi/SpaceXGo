@@ -138,7 +138,7 @@ fun ShipScreenContent(
                             }).build()
                     )
 
-                    val painterState = painter.state
+                    //val painterState = painter.state
                     /*if(painterState is AsyncImagePainter.State.Loading){
                         CircularProgressIndicator(
                             modifier = Modifier.align(Alignment.Center),

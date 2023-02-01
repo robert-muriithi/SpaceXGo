@@ -34,6 +34,7 @@ import coil.request.ImageRequest
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dev.robert.spacexgo.R
+import dev.robert.spacexgo.core.presentation.common.InfoRows
 import dev.robert.spacexgo.core.presentation.theme.darkBlue
 import dev.robert.spacexgo.core.presentation.theme.lightBlue
 import dev.robert.spacexgo.features.ships.domain.model.Ship
@@ -263,28 +264,7 @@ fun ShipDetailContent(shipData: Ship) {
 }
 
 
-@Composable
-fun InfoRows(
-    label: String,
-    value: String
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 5.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = label,
-            style = TextStyle(
-                fontSize = 12.sp,
-                fontFamily = FontFamily.Serif,
-                fontWeight = FontWeight.Bold
-            )
-        )
-        Text(text = value, style = TextStyle(fontSize = 12.sp, fontFamily = FontFamily.Serif))
-    }
-}
+
 
 
 

@@ -38,4 +38,10 @@ class CapsulesRepositoryImpl(private val api: ApiService, private val dao: Capsu
 
         }
     }.flowOn(Dispatchers.IO)
+
+    override fun searchCapsules(query: String): Flow<Resource<List<Capsule>>> = flow {
+        val results = dao.searchCapsules(query)
+        emit(Resource.Success(results.map { it.toCapsule() }))
+    }.flowOn(Dispatchers.IO)
+
 }

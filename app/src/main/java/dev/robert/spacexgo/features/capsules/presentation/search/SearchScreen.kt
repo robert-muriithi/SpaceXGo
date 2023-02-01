@@ -38,20 +38,20 @@ fun CapsulesSearchScreen(
             )
         }
     ) {
-        Box(modifier =Modifier.fillMaxSize()){
-            if(state.isLoading) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            if (state.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
-            if(!state.isLoading && state.capsules.isEmpty() && state.error == null) {
+            if (!state.isLoading && state.capsules.isEmpty() && state.error == null) {
                 Text(text = "No capsules found", modifier = Modifier.align(Alignment.Center))
             }
-            if(!state.isLoading && state.capsules.isNotEmpty() && state.error == null) {
+            if (!state.isLoading && state.capsules.isNotEmpty() && state.error == null) {
                 CapsulesSearchScreenContent(
                     capsuleList = state.capsules,
                     navigator = navigator
                 )
             }
-            if(!state.isLoading && state.error == null && state.capsules.isEmpty() && searchString.isEmpty()) {
+            if (!state.isLoading && state.error == null && state.capsules.isEmpty() && searchString.isEmpty()) {
                 Text(text = "Search for a capsule", modifier = Modifier.align(Alignment.Center))
             }
         }
