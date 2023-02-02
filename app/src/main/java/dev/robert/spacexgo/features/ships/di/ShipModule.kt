@@ -9,6 +9,7 @@ import dev.robert.spacexgo.features.ships.data.local.dao.ShipDao
 import dev.robert.spacexgo.features.ships.data.repository.ShipsRepositoryImpl
 import dev.robert.spacexgo.features.ships.domain.repository.ShipsRepository
 import dev.robert.spacexgo.features.ships.domain.usecase.GetAllShipsUseCase
+import dev.robert.spacexgo.features.ships.domain.usecase.GetShipUseCase
 import javax.inject.Singleton
 
 @Module
@@ -32,6 +33,16 @@ object ShipModule {
         repository: ShipsRepository
     ) : GetAllShipsUseCase{
         return GetAllShipsUseCase(
+            repository
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetShipUseCase(
+        repository: ShipsRepository
+    ) : GetShipUseCase {
+        return GetShipUseCase(
             repository
         )
     }

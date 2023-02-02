@@ -38,4 +38,12 @@ class ShipsRepositoryImpl(private val api: ApiService, private val dao: ShipDao)
 
         }
     }.flowOn(Dispatchers.IO)
+
+
+    override fun getShipById(id: String): Flow<Resource<Ship>> {
+        return flow {
+            val resultFromDb = dao.getShipById(id)
+            emit(Resource.Success(resultFromDb.toShip()))
+        }.flowOn(Dispatchers.IO)
+    }
 }

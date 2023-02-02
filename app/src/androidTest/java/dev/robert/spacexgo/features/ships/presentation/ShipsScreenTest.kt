@@ -134,6 +134,7 @@ private val testData = listOf(
         type = "Cargo",
         yearBuilt = 2000,
         homePort = "Port 1",
-        legacyId = "123"
+        legacyId = "123",
+        link = "https://www.google.com",
     )
 )

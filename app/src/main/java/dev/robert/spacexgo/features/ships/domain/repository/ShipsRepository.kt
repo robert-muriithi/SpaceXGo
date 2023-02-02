@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ShipsRepository {
     fun getAllShips() : Flow<Resource<List<Ship>>>
+    fun getShipById(id: String) : Flow<Resource<Ship>>
 }

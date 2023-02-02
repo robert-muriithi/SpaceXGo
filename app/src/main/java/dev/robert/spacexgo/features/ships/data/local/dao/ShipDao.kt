@@ -17,4 +17,7 @@ interface ShipDao {
 
    @Query("SELECT * FROM ships_table")
    fun getAllShips() : List<ShipEntity>
+
+   @Query("SELECT * FROM ships_table WHERE id = :id")
+   fun getShipById(id: String) : ShipEntity
 }

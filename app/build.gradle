@@ -134,4 +134,7 @@ dependencies {
 
     //Accompanist pager
     implementation "com.google.accompanist:accompanist-pager:0.24.10-beta"
+
+    //Lottie animation compose
+    implementation "com.airbnb.android:lottie-compose:5.2.0"
 }

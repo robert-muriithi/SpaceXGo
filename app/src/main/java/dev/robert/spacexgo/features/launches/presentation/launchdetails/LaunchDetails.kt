@@ -38,7 +38,10 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.presentation.common.InfoRows
 import dev.robert.spacexgo.core.presentation.theme.darkBlue
+import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.launches.domain.model.Launches
+import dev.robert.spacexgo.features.rockets.domain.model.Rocket
+import dev.robert.spacexgo.features.ships.domain.model.Ship
 import kotlinx.coroutines.delay
 
 
@@ -53,12 +56,24 @@ fun LaunchDetailsScreen(
     val scaffoldState = rememberScaffoldState()
     val pagerState = rememberPagerState()
     val state = viewModel.rocketDetails.value
+/*    val shipState = viewModel.shipDetails.value
+    val ships = ArrayList<Ship>()*/
+
+    LaunchedEffect(key1 = true, block = {
+        viewModel.getRocketDetails(launch.rocket)
+  /*      for (ship in launch.ships){
+            ship?.let { viewModel.getShipDetails(it) }
+            shipState.ship?.let { ships.add(it) }
+        }*/
+    })
+
     LaunchDetailsScreenContent(
         scaffoldState = scaffoldState,
         launch = launch,
         navigator = navigator,
         pagerState = pagerState,
-        state = state
+        state = state,
+       /* ships = ships*/
     )
 }
 
@@ -70,7 +85,8 @@ fun LaunchDetailsScreenContent(
     launch: Launches,
     navigator: DestinationsNavigator,
     pagerState: PagerState,
-    state: LaunchDetailsState
+    state: LaunchDetailsState,
+    /*ships: ArrayList<Ship>*/
 ) {
     val context = LocalContext.current
 
@@ -238,8 +254,6 @@ fun LaunchDetailsScreenContent(
                 }
                 item {
                     Box(modifier = Modifier.fillMaxWidth()) {
-
-
                         Card(
                             modifier = Modifier
                                 .padding(vertical = 8.dp, horizontal = 10.dp),
@@ -247,16 +261,67 @@ fun LaunchDetailsScreenContent(
                             shape = MaterialTheme.shapes.medium,
                             elevation = 1.dp
                         ) {
-                            Column(modifier = Modifier.fillMaxSize()) {
-                                Row(horizontalArrangement = Arrangement.Center) {
-                                    Text(text = "ROCKET")
+                            Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+                                Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
+                                    Text(text = "ROCKET", textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
                                 }
+                                InfoRows(label = "Model", value = state.rocket?.name  ?: "Unknown")
+                                InfoRows(label = "Status", value = if(state.rocket?.active == true) "Active" else "Inactive")
+                                InfoRows(label = "Success rate", value = "${state.rocket?.successRatePct}%")
+                                InfoRows(label = "Country", value = state.rocket?.country ?: "Unknown")
+                                InfoRows(label = "Stages", value = state.rocket?.stages.toString())
+                                Spacer(modifier = Modifier.height(5.dp))
+                                Divider(
+                                    modifier = Modifier.padding(horizontal = 10.dp),
+                                    thickness = 0.3.dp,
+                                )
+                                Text(
+                                    text = state.rocket?.description ?: "This rocket has currently no details",
+                                    modifier = Modifier.padding(8.dp),
+                                    textAlign = TextAlign.Justify
+                                )
 
                             }
 
                         }
                     }
                 }
+
+/*                items(ships.size){ ship ->
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        Card(
+                            modifier = Modifier
+                                .padding(vertical = 8.dp, horizontal = 10.dp),
+                            border = BorderStroke(1.5.dp, color = Color.Gray),
+                            shape = MaterialTheme.shapes.medium,
+                            elevation = 1.dp
+                        ) {
+                            Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+                                Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
+                                    Text(text = "SHIP", textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
+                                }
+                                InfoRows(label = "Name", value = ships[ship].name)
+                                InfoRows(label = "Status", value = if(ships[ship].active) "Active" else "Inactive")
+                                InfoRows(label = "Type", value = ships[ship].type ?: "Unknown")
+                                InfoRows(label = "Home port", value = ships[ship].homePort ?: "Unknown")
+                                InfoRows(label = "Year built", value = ships[ship].yearBuilt.toString())
+                                Spacer(modifier = Modifier.height(5.dp))
+                                Divider(
+                                    modifier = Modifier.padding(horizontal = 10.dp),
+                                    thickness = 0.3.dp,
+                                )
+                                Text(
+                                    text = ships[ship].legacyId ?: "This ship has no Legacy ID",
+                                    modifier = Modifier.padding(8.dp),
+                                    textAlign = TextAlign.Justify
+                                )
+
+                            }
+
+                        }
+                    }
+                }*/
+
             }
         }
     }

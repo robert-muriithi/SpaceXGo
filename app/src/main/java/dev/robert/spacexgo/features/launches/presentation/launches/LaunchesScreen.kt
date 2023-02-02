@@ -96,8 +96,6 @@ fun LaunchesScreen(
                 LaunchesSuccessStateComponent(
                     state = state,
                     navigator = navigator,
-                    categories = categories,
-                    viewModel = viewModel
                 )
             }
         }
@@ -200,8 +198,6 @@ fun BoxScope.LaunchesEmptyStateComponent(state: LaunchesState) {
 fun LaunchesSuccessStateComponent(
     state: LaunchesState,
     navigator: DestinationsNavigator,
-    categories: List<String>,
-    viewModel: LaunchesViewModel
 ) {
     if (!state.isLoading && state.message == null && state.launches.isNotEmpty()) {
         LazyVerticalGrid(

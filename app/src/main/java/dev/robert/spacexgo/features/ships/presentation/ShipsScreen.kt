@@ -55,7 +55,7 @@ import me.onebone.toolbar.*
 
 @OptIn(ExperimentalPagerApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Destination(start = true)
+@Destination()
 @Composable
 fun ShipsScreen(
     navigator: DestinationsNavigator,

@@ -203,7 +203,7 @@ private fun RocketCardContent(
             )
             Spacer(modifier = Modifier.height(5.dp))
             Text(
-                text = rocket.type ?: "Unknown Model",
+                text = rocket.type ,
                 style = TextStyle(fontSize = 11.sp, fontFamily = FontFamily.Serif)
             )
             Text(
