@@ -15,7 +15,7 @@ import dev.robert.spacexgo.features.company.data.local.dao.CompanyInfoDao
 import dev.robert.spacexgo.features.company.data.local.dao.HistoryDao
 import dev.robert.spacexgo.features.launches.data.local.dao.LaunchesDao
 import dev.robert.spacexgo.features.rockets.data.local.dao.RocketsDao
-import dev.robert.spacexgo.features.ships.data.converters.Converters
+import dev.robert.spacexgo.core.data.converters.Converters
 import dev.robert.spacexgo.features.ships.data.local.dao.ShipDao
 import javax.inject.Singleton
 
@@ -25,7 +25,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideConverters(gson: Gson) : Converters{
+    fun provideConverters(gson: Gson) : Converters {
         return Converters(gson = gson)
     }
 

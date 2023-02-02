@@ -84,9 +84,12 @@ fun SearchAppBar(
                 onSearchClicked(text)
             }
         ),
-
-        )
-
-
+        cursorBrush = Brush.linearGradient(
+            colors = listOf(
+                Color.White,
+                Color.White
+            )
+        ),
+    )
 }
 

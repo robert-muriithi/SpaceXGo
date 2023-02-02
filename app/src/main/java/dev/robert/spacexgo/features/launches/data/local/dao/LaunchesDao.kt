@@ -26,4 +26,7 @@ interface LaunchesDao {
     @Query("SELECT * FROM launches_table WHERE upcoming = 0")
     fun getPastLaunches(): List<LaunchesEntity>
 
+    @Query("SELECT * FROM launches_table WHERE name LIKE '%' || :query || '%'")
+    fun searchLaunches(query: String): List<LaunchesEntity>
+
 }

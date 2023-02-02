@@ -37,6 +37,7 @@ import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.presentation.theme.darkBlue
 import dev.robert.spacexgo.core.presentation.theme.darkGrey
 import dev.robert.spacexgo.features.destinations.LaunchDetailsScreenDestination
+import dev.robert.spacexgo.features.destinations.LaunchesSearchScreenDestination
 import dev.robert.spacexgo.features.launches.domain.model.Launches
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -65,7 +66,7 @@ fun LaunchesScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-
+                    navigator.navigate(LaunchesSearchScreenDestination)
                 }
             ) {
                 Icon(

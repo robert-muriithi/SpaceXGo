@@ -51,3 +51,4 @@ data class CapsuleDetailsViewState(
     val error: String? = null
 )
 
+

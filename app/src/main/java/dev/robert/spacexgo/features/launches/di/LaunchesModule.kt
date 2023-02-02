@@ -8,10 +8,7 @@ import dev.robert.spacexgo.core.data.local.database.SpaceXDatabase
 import dev.robert.spacexgo.core.data.remote.ApiService
 import dev.robert.spacexgo.features.launches.data.repository.LaunchesRepositoryImpl
 import dev.robert.spacexgo.features.launches.domain.repository.LaunchesRepository
-import dev.robert.spacexgo.features.launches.domain.usecase.GetAllLaunchesUseCase
-import dev.robert.spacexgo.features.launches.domain.usecase.GetPastLaunchesUseCase
-import dev.robert.spacexgo.features.launches.domain.usecase.GetSingleLaunchUseCase
-import dev.robert.spacexgo.features.launches.domain.usecase.GetUpcomingLaunchesUseCase
+import dev.robert.spacexgo.features.launches.domain.usecase.*
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
@@ -63,5 +60,12 @@ object LaunchesModule {
         return GetUpcomingLaunchesUseCase(launchesRepository = launchesRepository)
     }
 
+    @Provides
+    @Singleton
+    fun provideSearchLaunchesUseCase(
+        launchesRepository: LaunchesRepository
+    ): SearchLaunchesUseCase {
+        return SearchLaunchesUseCase(launchesRepository = launchesRepository)
+    }
 
 }

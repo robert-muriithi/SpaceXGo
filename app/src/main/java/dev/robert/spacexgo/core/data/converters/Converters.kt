@@ -1,4 +1,4 @@
-package dev.robert.spacexgo.features.ships.data.converters
+package dev.robert.spacexgo.core.data.converters
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter

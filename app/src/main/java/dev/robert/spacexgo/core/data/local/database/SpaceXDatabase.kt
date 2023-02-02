@@ -18,7 +18,7 @@ import dev.robert.spacexgo.features.launches.data.local.dao.LaunchesDao
 import dev.robert.spacexgo.features.launches.data.local.entity.LaunchesEntity
 import dev.robert.spacexgo.features.rockets.data.local.dao.RocketsDao
 import dev.robert.spacexgo.features.rockets.data.local.entity.RocketEntity
-import dev.robert.spacexgo.features.ships.data.converters.Converters
+import dev.robert.spacexgo.core.data.converters.Converters
 import dev.robert.spacexgo.features.ships.data.local.dao.ShipDao
 import dev.robert.spacexgo.features.ships.data.local.entity.ShipEntity
 

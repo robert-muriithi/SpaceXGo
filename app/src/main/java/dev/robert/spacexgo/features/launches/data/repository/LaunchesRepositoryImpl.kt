@@ -58,4 +58,11 @@ class LaunchesRepositoryImpl(
             val savedLaunches = db.launchesDao.getUpcomingLaunches()
             emit(Resource.Success(savedLaunches.map { it.toLaunches() }))
         }.flowOn(Dispatchers.IO)
+
+    override fun searchLaunches(query: String): Flow<Resource<List<Launches>>> {
+        return flow<Resource<List<Launches>>> {
+            val savedLaunches = db.launchesDao.searchLaunches(query)
+            emit(Resource.Success(savedLaunches.map { it.toLaunches() }))
+        }.flowOn(Dispatchers.IO)
+    }
 }
