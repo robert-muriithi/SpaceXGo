@@ -35,6 +35,8 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.coil.CoilImage
 import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.presentation.common.InfoRows
 import dev.robert.spacexgo.core.presentation.theme.darkBlue
@@ -185,23 +187,23 @@ fun LaunchDetailsScreenContent(
                                     .padding(16.dp)
                             ) {
                                 Row() {
-                                    Image(
-                                        painter = rememberAsyncImagePainter(
-                                            ImageRequest.Builder(LocalContext.current)
-                                                .data(
-                                                    data = launch.linksDto?.patchDto?.large
-                                                        ?: launch.linksDto?.patchDto?.small
-                                                )
-                                                .apply(block = fun ImageRequest.Builder.() {
-                                                    crossfade(true)
-
-                                                }).build()
+                                    CoilImage(
+                                        imageModel = {
+                                            launch.linksDto?.patchDto?.large
+                                                ?: launch.linksDto?.patchDto?.small
+                                        },
+                                        imageOptions = ImageOptions(
+                                            contentScale = ContentScale.Crop,
+                                            contentDescription = null,
                                         ),
                                         modifier = Modifier
                                             .size(80.dp)
                                             .clip(shape = CircleShape),
-                                        contentScale = ContentScale.Crop,
-                                        contentDescription = null
+                                        loading = {
+                                            CircularProgressIndicator(
+                                                modifier = Modifier.align(Alignment.Center)
+                                            )
+                                        },
                                     )
                                     Column(
                                         verticalArrangement = Arrangement.Top,

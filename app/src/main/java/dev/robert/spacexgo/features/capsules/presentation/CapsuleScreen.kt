@@ -46,7 +46,6 @@ fun CapsulesScreen(
 ) {
 
     val scaffoldState = rememberScaffoldState()
-    val modalBottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
 
     LaunchedEffect(key1 = true) {
         viewModel.eventsFlow.collectLatest { event ->

@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.input.key.Key.Companion.I
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -44,6 +45,9 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.skydoves.landscapist.ImageLoadState
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.coil.CoilImage
 import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.destinations.ShipDetailsScreenDestination
@@ -138,13 +142,6 @@ fun ShipScreenContent(
                             }).build()
                     )
 
-                    //val painterState = painter.state
-                    /*if(painterState is AsyncImagePainter.State.Loading){
-                        CircularProgressIndicator(
-                            modifier = Modifier.align(Alignment.Center),
-                            color = White
-                        )*/
-                    /*}else {*/
                         Image(
                             painter = painter,
                             contentDescription = null,
@@ -266,33 +263,21 @@ fun ShipItem(ship: Ship, navigator: DestinationsNavigator) {
                     .fillMaxHeight()
                     .width(70.dp)
             ) {
-
-                val painter = rememberAsyncImagePainter(
-                    ImageRequest.Builder(LocalContext.current)
-                        .data(
-                            data = ship.image
-                        )
-                        .apply(block = fun ImageRequest.Builder.() {
-                            crossfade(true)
-                        }).build()
-                )
-                val painterState = painter.state
-                if(painterState is AsyncImagePainter.State.Loading){
-                    CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
-                if(painterState is AsyncImagePainter.State.Success){
-                    Image(
-                        painter = painter,
-
+                CoilImage(
+                    imageModel = {
+                         ship.image
+                    },
+                    imageOptions = ImageOptions(
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize(),
-                        contentDescription = null
-                    )
-
-                }
-
+                        contentDescription = null,
+                    ),
+                    modifier = Modifier.fillMaxSize(),
+                    loading = {
+                        CircularProgressIndicator(
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+                    },
+                )
             }
             Column(
                 modifier = Modifier.padding(horizontal = 5.dp),

@@ -33,6 +33,8 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.coil.CoilImage
 import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.presentation.theme.darkBlue
 import dev.robert.spacexgo.core.presentation.theme.darkGrey
@@ -234,26 +236,24 @@ fun LaunchItem(
             }
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            val painter = rememberAsyncImagePainter(
-                ImageRequest.Builder(LocalContext.current)
-                    .data(
-                        data = launch.linksDto?.patchDto?.large
-                            ?: launch.linksDto?.patchDto?.small
-                    )
-                    .placeholder(R.drawable.ic_launches)
-                    .apply(block = fun ImageRequest.Builder.() {
-                        crossfade(true)
 
-                    }).build()
-            )
-
-            Image(
-                painter = painter,
-                contentDescription = null,
+            CoilImage(
+                imageModel = {
+                    launch.linksDto?.patchDto?.large
+                        ?: launch.linksDto?.patchDto?.small
+                },
+                imageOptions = ImageOptions(
+                    contentScale = ContentScale.Fit,
+                    contentDescription = null,
+                ),
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(8.dp),
-                contentScale = ContentScale.Fit,
+                loading = {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                },
             )
 
             Box(

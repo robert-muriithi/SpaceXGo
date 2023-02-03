@@ -33,6 +33,8 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.coil.CoilImage
 import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.rockets.domain.model.Rocket
@@ -169,24 +171,21 @@ private fun RocketCardContent(
                 .width(70.dp)
         ) {
 
-            val painter = rememberAsyncImagePainter(
-                ImageRequest.Builder(LocalContext.current)
-                    .data(
-                        data = rocket.flickrImages[0]
-                    )
-                    .placeholder(R.drawable.ic_rocket)
-                    .apply(block = fun ImageRequest.Builder.() {
-                        crossfade(true)
-                    }).build()
-            )
-            val painterState = painter.state
-            Image(
-                painter = painter,
-                contentScale = ContentScale.Crop,
+            CoilImage(
+                imageModel = {
+                    rocket.flickrImages[0]
+                },
+                imageOptions = ImageOptions(
+                    contentScale = ContentScale.Crop,
+                    contentDescription = null,
+                ),
                 modifier = Modifier.fillMaxSize(),
-                contentDescription = null
+                loading = {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                },
             )
-
 
         }
         Column(
