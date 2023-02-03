@@ -112,3 +112,8 @@ In this section i've included some resources ie. articles and GitHub reposirtori
 <img src="images/capsules.png" width="250"/> <img src="images/capsule_search.png" width="250"/>
 <img src="images/rockets.png" width="250"/> <img src="images/rocket_details.png" width="250"/>
 <img src="images/company_info.png" width="250"/>
+
+  ## Support
+  
+- Found this project useful ❤️? Support by clicking the ⭐️ button on the upper right of this page. ✌
+- Feel free to contribute in any way to the project from typos in docs to code review are all welcome.
