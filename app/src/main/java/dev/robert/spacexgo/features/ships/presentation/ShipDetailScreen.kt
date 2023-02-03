@@ -47,12 +47,20 @@ fun ShipDetailsScreen(
     shipData: Ship
 ) {
     val scaffoldState = rememberScaffoldState()
-    ShipDetailScreenContent(shipData = shipData, scaffoldState = scaffoldState, navigator = navigator)
+    ShipDetailScreenContent(
+        shipData = shipData,
+        scaffoldState = scaffoldState,
+        navigator = navigator
+    )
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun ShipDetailScreenContent(shipData: Ship, scaffoldState: ScaffoldState, navigator: DestinationsNavigator) {
+fun ShipDetailScreenContent(
+    shipData: Ship,
+    scaffoldState: ScaffoldState,
+    navigator: DestinationsNavigator
+) {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {

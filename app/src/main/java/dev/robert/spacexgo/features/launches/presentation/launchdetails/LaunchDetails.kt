@@ -63,10 +63,10 @@ fun LaunchDetailsScreen(
 
     LaunchedEffect(key1 = true, block = {
         viewModel.getRocketDetails(launch.rocket)
-  /*      for (ship in launch.ships){
-            ship?.let { viewModel.getShipDetails(it) }
-            shipState.ship?.let { ships.add(it) }
-        }*/
+        /*      for (ship in launch.ships){
+                  ship?.let { viewModel.getShipDetails(it) }
+                  shipState.ship?.let { ships.add(it) }
+              }*/
     })
 
     LaunchDetailsScreenContent(
@@ -75,7 +75,7 @@ fun LaunchDetailsScreen(
         navigator = navigator,
         pagerState = pagerState,
         state = state,
-       /* ships = ships*/
+        /* ships = ships*/
     )
 }
 
@@ -263,14 +263,32 @@ fun LaunchDetailsScreenContent(
                             shape = MaterialTheme.shapes.medium,
                             elevation = 1.dp
                         ) {
-                            Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-                                Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
-                                    Text(text = "ROCKET", textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
+                            Column(modifier = Modifier
+                                .fillMaxSize()
+                                .padding(16.dp)) {
+                                Row(
+                                    horizontalArrangement = Arrangement.Center,
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text(
+                                        text = "ROCKET",
+                                        textAlign = TextAlign.Center,
+                                        fontWeight = FontWeight.Bold
+                                    )
                                 }
-                                InfoRows(label = "Model", value = state.rocket?.name  ?: "Unknown")
-                                InfoRows(label = "Status", value = if(state.rocket?.active == true) "Active" else "Inactive")
-                                InfoRows(label = "Success rate", value = "${state.rocket?.successRatePct}%")
-                                InfoRows(label = "Country", value = state.rocket?.country ?: "Unknown")
+                                InfoRows(label = "Model", value = state.rocket?.name ?: "Unknown")
+                                InfoRows(
+                                    label = "Status",
+                                    value = if (state.rocket?.active == true) "Active" else "Inactive"
+                                )
+                                InfoRows(
+                                    label = "Success rate",
+                                    value = "${state.rocket?.successRatePct}%"
+                                )
+                                InfoRows(
+                                    label = "Country",
+                                    value = state.rocket?.country ?: "Unknown"
+                                )
                                 InfoRows(label = "Stages", value = state.rocket?.stages.toString())
                                 Spacer(modifier = Modifier.height(5.dp))
                                 Divider(
@@ -278,7 +296,8 @@ fun LaunchDetailsScreenContent(
                                     thickness = 0.3.dp,
                                 )
                                 Text(
-                                    text = state.rocket?.description ?: "This rocket has currently no details",
+                                    text = state.rocket?.description
+                                        ?: "This rocket has currently no details",
                                     modifier = Modifier.padding(8.dp),
                                     textAlign = TextAlign.Justify
                                 )

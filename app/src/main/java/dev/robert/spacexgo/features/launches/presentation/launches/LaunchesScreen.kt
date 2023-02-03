@@ -260,10 +260,11 @@ fun LaunchItem(
                 modifier = Modifier
                     .fillMaxSize(),
                 contentAlignment = Alignment.TopStart
-            ){
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(5.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(5.dp)
                 ) {
                     Text(
                         text = "#${launch.flightNumber}",
@@ -278,7 +279,8 @@ fun LaunchItem(
                     .padding(5.dp),
                 contentAlignment = Alignment.BottomStart
             ) {
-                Column(modifier = Modifier.fillMaxWidth(),
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.Bottom,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {

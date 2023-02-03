@@ -18,21 +18,21 @@ import javax.inject.Inject
 class LaunchDetailsViewModel @Inject constructor(
     private val getSingleRocketUseCase: GetSingleRocketUseCase,
     private val getSingleShipUseCase: GetShipUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private val _rocketDetails = mutableStateOf(LaunchDetailsState())
-    val rocketDetails : State<LaunchDetailsState> = _rocketDetails
+    val rocketDetails: State<LaunchDetailsState> = _rocketDetails
 
     private val _shipDetails = mutableStateOf(ShipDetailsState())
-    val shipDetails : State<ShipDetailsState> = _shipDetails
+    val shipDetails: State<ShipDetailsState> = _shipDetails
 
-    fun getRocketDetails(id: String){
+    fun getRocketDetails(id: String) {
         _rocketDetails.value = rocketDetails.value.copy(
             isLoading = true
         )
         viewModelScope.launch {
             getSingleRocketUseCase(id).collectLatest { result ->
-                when(result){
+                when (result) {
                     is Resource.Error -> {
                         _rocketDetails.value = rocketDetails.value.copy(
                             error = result.message
@@ -51,13 +51,13 @@ class LaunchDetailsViewModel @Inject constructor(
         }
     }
 
-    fun getShipDetails(id: String){
+    fun getShipDetails(id: String) {
         _shipDetails.value = shipDetails.value.copy(
             isLoading = true
         )
         viewModelScope.launch {
             getSingleShipUseCase(id).collectLatest { result ->
-                when(result){
+                when (result) {
                     is Resource.Error -> {
                         _shipDetails.value = shipDetails.value.copy(
                             error = result.message
@@ -84,13 +84,9 @@ class LaunchDetailsViewModel @Inject constructor(
  */
 
 data class LaunchDetailsState(
-    val isLoading: Boolean = false,
-    val error : String? = null,
-    val rocket: Rocket? = null
+    val isLoading: Boolean = false, val error: String? = null, val rocket: Rocket? = null
 )
 
 data class ShipDetailsState(
-    val isLoading: Boolean = false,
-    val error : String? = null,
-    val ship: Ship? = null
+    val isLoading: Boolean = false, val error: String? = null, val ship: Ship? = null
 )
