@@ -1,6 +1,8 @@
 # Space X Go  🚀 
 Space X Go is an android app built using Kotlin that consumes [Space X API](https://github.com/r-spacex/SpaceX-API) to display rockets, ships, launches and Space X company information. It has been built following Clean Architecture Principle, Repository Pattern, MVVM Architecture in the presentation layer as well as Jetpack components. Some of the features are Launch tracking & other details.
 
+![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Frobert-muriithi%2FSpaceXGo&label=visitors&countColor=%23263759&style=flat-square)
+
 ## Table Of Content.
 
 - [Prerequisite](#prerequisite)
