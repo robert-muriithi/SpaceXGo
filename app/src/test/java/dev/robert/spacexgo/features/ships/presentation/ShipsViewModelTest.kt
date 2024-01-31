@@ -90,5 +90,6 @@ private val testData = listOf(
         yearBuilt = 2000,
         homePort = "Port 1",
         legacyId = "123",
+        link = "jnjvfvjnf"
     )
 )
