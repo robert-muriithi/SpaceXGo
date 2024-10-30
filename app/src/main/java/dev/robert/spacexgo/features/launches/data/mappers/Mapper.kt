@@ -46,7 +46,7 @@ fun LaunchesEntity.toLaunches() : Launches {
         net = net,
         payloads = payloads,
         rocket = rocket,
-        ships = ships,
+        ships = ships ?: emptyList(),
         success = success,
         upcoming = upcoming,
         crew = crew,

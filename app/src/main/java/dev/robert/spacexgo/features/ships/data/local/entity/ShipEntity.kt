@@ -12,11 +12,11 @@ data class ShipEntity(
     @ColumnInfo(name = "shipImage", defaultValue = "")
     val shipImage: String?,
     val lastAisUpdate: String?,
-    val launches: List<String?>,
+    val launches: List<String>? = emptyList(),
     val massKg: Int,
     val model: String?,
     val name: String,
-    val roles: List<String?>,
+    val roles: List<String>? = emptyList(),
     val speedKn: String?,
     val status: String?,
     val type: String?,

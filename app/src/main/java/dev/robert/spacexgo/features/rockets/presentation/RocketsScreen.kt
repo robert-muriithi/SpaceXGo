@@ -9,18 +9,24 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -28,9 +34,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImagePainter
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.skydoves.landscapist.ImageOptions
@@ -38,7 +41,6 @@ import com.skydoves.landscapist.coil.CoilImage
 import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.rockets.domain.model.Rocket
-import dev.robert.spacexgo.core.presentation.theme.darkGrey
 import dev.robert.spacexgo.features.destinations.RocketDetailsScreenDestination
 import kotlinx.coroutines.flow.collectLatest
 
@@ -48,12 +50,12 @@ fun RocketsScreen(
     navigator: DestinationsNavigator,
     viewModel: RocketsViewModel = hiltViewModel(),
 ) {
-    val scaffoldState = rememberScaffoldState()
+    val snackbarHostState by remember { mutableStateOf(SnackbarHostState()) }
     LaunchedEffect(key1 = true, block = {
         viewModel.events.collectLatest { UiEvents ->
             when (UiEvents) {
                 is UiEvents.ErrorEvent -> {
-                    scaffoldState.snackbarHostState.showSnackbar(message = UiEvents.message)
+                    snackbarHostState.showSnackbar(message = UiEvents.message)
                 }
                 is UiEvents.NavigationEvent -> {
                     //
@@ -63,30 +65,26 @@ fun RocketsScreen(
     })
     val state = viewModel.rocketsState.value
 
-    RocketScreenContent(scaffoldState = scaffoldState, state = state, navigator = navigator)
+    RocketScreenContent(state = state, navigator = navigator)
 
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun RocketScreenContent(
-    scaffoldState: ScaffoldState,
     state: RocketsState,
     navigator: DestinationsNavigator
 ) {
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 title = {
                     Text(text = "Rockets", fontFamily = FontFamily.Serif)
                 },
-                elevation = 1.dp
             )
         }
-    ) {
-
-        Box(modifier = Modifier.fillMaxSize()) {
+    ) { Box(modifier = Modifier.fillMaxSize()) {
 
             RocketLoadingStateComponent(state)
 
@@ -145,7 +143,7 @@ fun RocketItem(
     navigator: DestinationsNavigator
 ) {
     Card(
-        elevation = 1.dp,
+        elevation = CardDefaults.elevatedCardElevation(),
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp)

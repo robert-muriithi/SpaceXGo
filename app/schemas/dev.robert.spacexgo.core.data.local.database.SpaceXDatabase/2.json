@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "db990def04a942d6b507351dcd98d8ab",
+    "identityHash": "9a23172df652d830879e3718405b66d2",
     "entities": [
       {
         "tableName": "ships_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`active` INTEGER NOT NULL, `id` TEXT NOT NULL, `shipImage` TEXT DEFAULT '', `lastAisUpdate` TEXT, `launches` TEXT NOT NULL, `massKg` INTEGER NOT NULL, `model` TEXT, `name` TEXT NOT NULL, `roles` TEXT NOT NULL, `speedKn` TEXT, `status` TEXT, `type` TEXT, `yearBuilt` INTEGER NOT NULL, `homePort` TEXT, `legacyId` TEXT, `link` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`active` INTEGER NOT NULL, `id` TEXT NOT NULL, `shipImage` TEXT DEFAULT '', `lastAisUpdate` TEXT, `launches` TEXT, `massKg` INTEGER NOT NULL, `model` TEXT, `name` TEXT NOT NULL, `roles` TEXT, `speedKn` TEXT, `status` TEXT, `type` TEXT, `yearBuilt` INTEGER NOT NULL, `homePort` TEXT, `legacyId` TEXT, `link` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "active",
@@ -37,7 +37,7 @@
             "fieldPath": "launches",
             "columnName": "launches",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "massKg",
@@ -61,7 +61,7 @@
             "fieldPath": "roles",
             "columnName": "roles",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "speedKn",
@@ -107,17 +107,17 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "id"
-          ],
-          "autoGenerate": false
+          ]
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "capsules_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `landLandings` INTEGER NOT NULL, `lastUpdate` TEXT, `launches` TEXT NOT NULL, `reuseCount` INTEGER NOT NULL, `serial` TEXT, `status` TEXT, `type` TEXT, `waterLandings` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `landLandings` INTEGER NOT NULL, `lastUpdate` TEXT, `launches` TEXT, `reuseCount` INTEGER NOT NULL, `serial` TEXT, `status` TEXT, `type` TEXT, `waterLandings` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -141,7 +141,7 @@
             "fieldPath": "launches",
             "columnName": "launches",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "reuseCount",
@@ -175,10 +175,10 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "id"
-          ],
-          "autoGenerate": false
+          ]
         },
         "indices": [],
         "foreignKeys": []
@@ -243,10 +243,10 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "id"
-          ],
-          "autoGenerate": false
+          ]
         },
         "indices": [],
         "foreignKeys": []
@@ -353,10 +353,10 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "id"
-          ],
-          "autoGenerate": false
+          ]
         },
         "indices": [],
         "foreignKeys": []
@@ -397,17 +397,17 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "id"
-          ],
-          "autoGenerate": false
+          ]
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "launches_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`autoUpdate` INTEGER NOT NULL, `capsules` TEXT NOT NULL, `dateLocal` TEXT NOT NULL, `datePrecision` TEXT NOT NULL, `dateUtc` TEXT NOT NULL, `details` TEXT, `flightNumber` INTEGER NOT NULL, `id` TEXT NOT NULL, `launchLibraryId` TEXT, `launchpad` TEXT NOT NULL, `linksDto` TEXT, `name` TEXT NOT NULL, `net` INTEGER NOT NULL, `payloads` TEXT NOT NULL, `rocket` TEXT NOT NULL, `ships` TEXT NOT NULL, `success` INTEGER NOT NULL, `upcoming` INTEGER NOT NULL, `crew` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`autoUpdate` INTEGER NOT NULL, `capsules` TEXT NOT NULL, `dateLocal` TEXT NOT NULL, `datePrecision` TEXT NOT NULL, `dateUtc` TEXT NOT NULL, `details` TEXT, `flightNumber` INTEGER NOT NULL, `id` TEXT NOT NULL, `launchLibraryId` TEXT, `launchpad` TEXT NOT NULL, `linksDto` TEXT, `name` TEXT NOT NULL, `net` INTEGER NOT NULL, `payloads` TEXT NOT NULL, `rocket` TEXT NOT NULL, `ships` TEXT, `success` INTEGER NOT NULL, `upcoming` INTEGER NOT NULL, `crew` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "autoUpdate",
@@ -503,7 +503,7 @@
             "fieldPath": "ships",
             "columnName": "ships",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "success",
@@ -525,10 +525,10 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "id"
-          ],
-          "autoGenerate": false
+          ]
         },
         "indices": [],
         "foreignKeys": []
@@ -537,7 +537,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'db990def04a942d6b507351dcd98d8ab')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9a23172df652d830879e3718405b66d2')"
     ]
   }
 }

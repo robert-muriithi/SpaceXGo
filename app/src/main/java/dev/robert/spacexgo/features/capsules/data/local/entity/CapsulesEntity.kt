@@ -10,7 +10,7 @@ data class CapsulesEntity(
     @PrimaryKey val id: String,
     val landLandings: Int,
     val lastUpdate: String?,
-    val launches: List<String?>,
+    val launches: List<String>? = emptyList(),
     val reuseCount: Int,
     val serial: String?,
     val status: String?,

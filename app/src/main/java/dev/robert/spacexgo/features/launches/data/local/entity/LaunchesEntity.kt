@@ -24,7 +24,7 @@ data class LaunchesEntity(
     val net: Boolean,
     val payloads: List<String>,
     val rocket: String,
-    val ships: List<String?>,
+    val ships: List<String>? = emptyList(),
     val success: Boolean,
     val upcoming: Boolean,
     val crew: List<CrewDto>,

@@ -8,7 +8,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -40,7 +46,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = MaterialTheme.colorScheme.background
                 ) {
 
                     val showBottomNav: Boolean
@@ -67,8 +73,8 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         bottomBar = {
                             if (showBottomNav) {
-                                BottomNavigation(
-                                    backgroundColor = darkGrey,
+                                NavigationBar(
+                                    containerColor = darkGrey,
                                     contentColor = contentColor,
                                     modifier = Modifier
                                         .padding(10.dp)
@@ -82,7 +88,7 @@ class MainActivity : ComponentActivity() {
                                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                                     val currentDestination = navBackStackEntry?.destination
                                     bottomNavItems.forEach { item ->
-                                        BottomNavigationItem(
+                                        NavigationBarItem(
                                             icon = {
                                                 Icon(
                                                     painter = painterResource(id = item.icon),
@@ -93,8 +99,6 @@ class MainActivity : ComponentActivity() {
                                                 Text(text = item.label, overflow = TextOverflow.Ellipsis, fontSize = 10.sp)
                                             },
                                             alwaysShowLabel = true,
-                                            selectedContentColor = lightBlue,
-                                            unselectedContentColor = Color(0xFFe9e9e9),
                                             selected = currentDestination?.route?.contains(item.destination.route) == true,
 
                                             onClick = {

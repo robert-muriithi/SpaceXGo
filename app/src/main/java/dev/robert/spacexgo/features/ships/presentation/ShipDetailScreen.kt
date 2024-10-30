@@ -13,7 +13,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,23 +56,20 @@ fun ShipDetailsScreen(
     navigator: DestinationsNavigator,
     shipData: Ship
 ) {
-    val scaffoldState = rememberScaffoldState()
+    val snackbarHostState by remember { mutableStateOf(SnackbarHostState()) }
     ShipDetailScreenContent(
         shipData = shipData,
-        scaffoldState = scaffoldState,
         navigator = navigator
     )
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ShipDetailScreenContent(
     shipData: Ship,
-    scaffoldState: ScaffoldState,
     navigator: DestinationsNavigator
 ) {
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = {
             Box(
                 modifier = Modifier
@@ -113,7 +120,7 @@ fun ShipRolesContent(shipData: Ship) {
             .padding(vertical = 8.dp, horizontal = 16.dp),
         border = BorderStroke(1.5.dp, color = Color.Gray),
         shape = MaterialTheme.shapes.medium,
-        elevation = 1.dp
+        elevation = CardDefaults.elevatedCardElevation()
     ) {
         Column(
             modifier = Modifier
@@ -133,12 +140,12 @@ fun ShipRolesContent(shipData: Ship) {
                 )
             }
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                Divider(
-                    color = Color.Gray,
-                    thickness = 0.3.dp,
+                HorizontalDivider(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 50.dp)
+                        .padding(horizontal = 50.dp),
+                    thickness = 0.3.dp,
+                    color = Color.Gray
                 )
             }
             shipData.roles.forEach {
@@ -228,7 +235,7 @@ fun ShipDetailContent(shipData: Ship) {
             },
         border = BorderStroke(1.5.dp, color = Color.Gray),
         shape = MaterialTheme.shapes.medium,
-        elevation = 1.dp
+        elevation = CardDefaults.elevatedCardElevation()
     )
     {
         Column(

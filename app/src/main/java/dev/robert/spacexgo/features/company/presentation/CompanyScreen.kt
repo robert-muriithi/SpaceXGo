@@ -11,8 +11,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,7 +60,7 @@ import me.onebone.toolbar.*
 fun CompanyScreen(
     viewModel: CompanyViewModel = hiltViewModel(),
 ) {
-    val scaffoldState = rememberScaffoldState()
+    val snackbarHostState by remember { mutableStateOf(SnackbarHostState()) }
     val collapsingToolbarState = rememberCollapsingToolbarScaffoldState()
     val pagerState = rememberPagerState()
 
@@ -61,7 +68,7 @@ fun CompanyScreen(
         viewModel.uiEvent.collectLatest { event ->
             when (event) {
                 is UiEvents.ErrorEvent -> {
-                    scaffoldState.snackbarHostState.showSnackbar(message = event.message)
+                    snackbarHostState.showSnackbar(message = event.message)
                 }
                 is UiEvents.NavigationEvent -> {
 
@@ -80,7 +87,7 @@ fun CompanyScreen(
 }
 
 @OptIn(ExperimentalPagerApi::class)
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun CompanyInfoScreenContent(
     scaffoldState: CollapsingToolbarScaffoldState,
@@ -207,7 +214,7 @@ fun HistoryItem(history: History, count: Int) {
             .clickable {
                  context.startActivity(intent)
             },
-        elevation = 1.dp,
+        elevation = CardDefaults.elevatedCardElevation()
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(

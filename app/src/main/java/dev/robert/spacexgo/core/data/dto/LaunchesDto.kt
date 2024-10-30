@@ -41,7 +41,7 @@ data class LaunchesDto(
     @SerializedName("rocket")
     val rocket: String,
     @SerializedName("ships")
-    val ships: List<String?>,
+    val ships: List<String>?,
     @SerializedName("static_fire_date_unix")
     val staticFireDateUnix: Any,
     @SerializedName("static_fire_date_utc")

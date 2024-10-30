@@ -23,7 +23,7 @@ fun CapsulesEntity.toCapsule() : Capsule {
         id = id,
         landLandings = landLandings,
         lastUpdate = lastUpdate,
-        launches = launches,
+        launches = launches ?: emptyList(),
         reuseCount = reuseCount,
         serial = serial,
         status = status,

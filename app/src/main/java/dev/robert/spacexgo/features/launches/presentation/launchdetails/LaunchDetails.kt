@@ -5,19 +5,39 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -39,11 +59,7 @@ import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil.CoilImage
 import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.presentation.common.InfoRows
-import dev.robert.spacexgo.core.presentation.theme.darkBlue
-import dev.robert.spacexgo.core.utils.UiEvents
 import dev.robert.spacexgo.features.launches.domain.model.Launches
-import dev.robert.spacexgo.features.rockets.domain.model.Rocket
-import dev.robert.spacexgo.features.ships.domain.model.Ship
 import kotlinx.coroutines.delay
 
 
@@ -55,7 +71,6 @@ fun LaunchDetailsScreen(
     launch: Launches,
     viewModel: LaunchDetailsViewModel = hiltViewModel()
 ) {
-    val scaffoldState = rememberScaffoldState()
     val pagerState = rememberPagerState()
     val state = viewModel.rocketDetails.value
 /*    val shipState = viewModel.shipDetails.value
@@ -70,7 +85,6 @@ fun LaunchDetailsScreen(
     })
 
     LaunchDetailsScreenContent(
-        scaffoldState = scaffoldState,
         launch = launch,
         navigator = navigator,
         pagerState = pagerState,
@@ -79,11 +93,10 @@ fun LaunchDetailsScreen(
     )
 }
 
-@OptIn(ExperimentalPagerApi::class)
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LaunchDetailsScreenContent(
-    scaffoldState: ScaffoldState,
     launch: Launches,
     navigator: DestinationsNavigator,
     pagerState: PagerState,
@@ -93,13 +106,11 @@ fun LaunchDetailsScreenContent(
     val context = LocalContext.current
 
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 title = {
                     Text(text = launch.name, fontFamily = FontFamily.Serif)
                 },
-                elevation = 1.dp,
                 navigationIcon = {
                     IconButton(onClick = {
                         navigator.navigateUp()
@@ -179,7 +190,7 @@ fun LaunchDetailsScreenContent(
                                 .padding(vertical = 8.dp, horizontal = 10.dp),
                             border = BorderStroke(1.5.dp, color = Color.Gray),
                             shape = MaterialTheme.shapes.medium,
-                            elevation = 1.dp
+                            elevation = CardDefaults.elevatedCardElevation()
                         ) {
                             Column(
                                 modifier = Modifier
@@ -241,9 +252,9 @@ fun LaunchDetailsScreenContent(
                                     }
                                 }
                                 Spacer(modifier = Modifier.height(5.dp))
-                                Divider(
+                                HorizontalDivider(
                                     modifier = Modifier.padding(horizontal = 10.dp),
-                                    thickness = 0.3.dp,
+                                    thickness = 0.3.dp
                                 )
                                 Text(
                                     text = launch.details ?: "This launch has currently no details",
@@ -261,7 +272,7 @@ fun LaunchDetailsScreenContent(
                                 .padding(vertical = 8.dp, horizontal = 10.dp),
                             border = BorderStroke(1.5.dp, color = Color.Gray),
                             shape = MaterialTheme.shapes.medium,
-                            elevation = 1.dp
+                            elevation = CardDefaults.elevatedCardElevation()
                         ) {
                             Column(modifier = Modifier
                                 .fillMaxSize()
@@ -291,9 +302,9 @@ fun LaunchDetailsScreenContent(
                                 )
                                 InfoRows(label = "Stages", value = state.rocket?.stages.toString())
                                 Spacer(modifier = Modifier.height(5.dp))
-                                Divider(
+                                HorizontalDivider(
                                     modifier = Modifier.padding(horizontal = 10.dp),
-                                    thickness = 0.3.dp,
+                                    thickness = 0.3.dp
                                 )
                                 Text(
                                     text = state.rocket?.description
@@ -307,42 +318,6 @@ fun LaunchDetailsScreenContent(
                         }
                     }
                 }
-
-/*                items(ships.size){ ship ->
-                    Box(modifier = Modifier.fillMaxWidth()) {
-                        Card(
-                            modifier = Modifier
-                                .padding(vertical = 8.dp, horizontal = 10.dp),
-                            border = BorderStroke(1.5.dp, color = Color.Gray),
-                            shape = MaterialTheme.shapes.medium,
-                            elevation = 1.dp
-                        ) {
-                            Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-                                Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
-                                    Text(text = "SHIP", textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
-                                }
-                                InfoRows(label = "Name", value = ships[ship].name)
-                                InfoRows(label = "Status", value = if(ships[ship].active) "Active" else "Inactive")
-                                InfoRows(label = "Type", value = ships[ship].type ?: "Unknown")
-                                InfoRows(label = "Home port", value = ships[ship].homePort ?: "Unknown")
-                                InfoRows(label = "Year built", value = ships[ship].yearBuilt.toString())
-                                Spacer(modifier = Modifier.height(5.dp))
-                                Divider(
-                                    modifier = Modifier.padding(horizontal = 10.dp),
-                                    thickness = 0.3.dp,
-                                )
-                                Text(
-                                    text = ships[ship].legacyId ?: "This ship has no Legacy ID",
-                                    modifier = Modifier.padding(8.dp),
-                                    textAlign = TextAlign.Justify
-                                )
-
-                            }
-
-                        }
-                    }
-                }*/
-
             }
         }
     }

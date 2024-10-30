@@ -10,6 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -73,7 +74,7 @@ fun SearchAppBar(
         },
         textStyle = TextStyle(
             color = Color.White,
-            fontSize = MaterialTheme.typography.subtitle1.fontSize
+            fontSize = MaterialTheme.typography.titleSmall.fontSize
         ),
         singleLine = true,
         keyboardOptions = KeyboardOptions(

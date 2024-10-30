@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Scaffold
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -15,6 +14,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dev.robert.spacexgo.R
 import dev.robert.spacexgo.core.presentation.theme.darkGrey
@@ -23,13 +23,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Destination(start = true)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Destination
+@RootNavGraph(start = true)
 @Composable
 fun SplashScreen(
     navigator: DestinationsNavigator
 ) {
-    val scaffoldState = rememberScaffoldState()
+
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.rocket_loader))
 
     LaunchedEffect(key1 = true) {
@@ -41,7 +42,7 @@ fun SplashScreen(
         }
     }
 
-    Scaffold(scaffoldState = scaffoldState) {
+    Scaffold {
         Box(modifier = Modifier
             .fillMaxSize()
             .background(darkGrey)){

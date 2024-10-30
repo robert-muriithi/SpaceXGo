@@ -13,8 +13,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -65,15 +70,16 @@ fun ShipsScreen(
     navigator: DestinationsNavigator,
     viewModel: ShipsViewModel = hiltViewModel()
 ) {
-    val scaffoldState = rememberScaffoldState()
     val collapsingToolbarState = rememberCollapsingToolbarScaffoldState()
     val pagerState = rememberPagerState()
+
+    val snackbarHostState by remember { mutableStateOf(SnackbarHostState()) }
 
     LaunchedEffect(key1 = true) {
         viewModel.eventsFlow.collectLatest { event ->
             when (event) {
                 is UiEvents.ErrorEvent -> {
-                    scaffoldState.snackbarHostState.showSnackbar(message = event.message)
+                    snackbarHostState.showSnackbar(message = event.message)
                 }
                 is UiEvents.NavigationEvent -> {
                     navigator.navigate(route = event.route)
